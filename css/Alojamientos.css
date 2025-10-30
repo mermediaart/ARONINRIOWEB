@@ -1,0 +1,206 @@
+
+
+/*--------------------------------------------------------
+BANNER INICIO
+--------------------------------------------------------*/
+    /* HEADER */
+    header { 
+      padding: 120px 20px 40px; 
+      text-align: center; 
+      background:  #33e4e1; 
+      color: #fff; 
+      position: relative; 
+    }
+    header::before { 
+      content: ""; 
+      position: absolute; 
+      inset: 0; 
+      background: rgba(0, 0, 0, 0.5); 
+    }
+    header h1 { 
+      position: relative; 
+      z-index: 1; 
+      font-size: 2.5rem;
+    }
+
+
+/*--------------------------------------------------------
+LISTADO DE 
+--------------------------------------------------------*/
+    /* BARRA DE BÚSQUEDA Y FILTROS */
+    .search-filter {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    .search-filter input, .search-filter select {
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .search-filter input:focus, .search-filter select:focus {
+      border-color: var(--primary);
+    }
+
+    /* LISTADO DE ALOJAMIENTOS */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .card:hover { transform: scale(1.02); }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card h3 { margin: 0 0 5px; font-size: 18px; }
+    .card p { margin: 5px 0; font-size: 14px; }
+
+    /* ESTILOS DE LA MODAL (NUEVOS) */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2500;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 90%;
+        max-width: 600px;
+        border-radius: 10px;
+        position: relative;
+        
+    }
+
+    .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal.show {
+        display: block;
+    }
+
+    .modal-options-container {
+        margin-top: 20px;
+    }
+    .modal-options-container label, .modal-options-container select {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #add-to-cart-modal {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    #add-to-cart-modal:hover {
+        background-color: #008a6e;
+    }
+    
+    /* Estilos adicionales para la galería de la modal */
+    .modal-gallery {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 20px;
+        aspect-ratio: 16 / 9;
+    }
+
+    .modal-slides-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-slides-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .modal-nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 10;
+        font-size: 1.5rem;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    .modal-nav-button:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .prev-slide {
+        left: 10px;
+    }
+
+    .next-slide {
+        right: 10px;
+    }
+
+    /* Estilos para la nueva descripción en la modal */
+    .modal-description {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        color: #666;
+        font-size: 1em;
+    }

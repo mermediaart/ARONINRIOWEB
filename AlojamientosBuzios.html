@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alojamientos en Buzios</title>
+  <link rel="stylesheet" href="css/Alojamientos.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!--ICONOS-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
+    rel="stylesheet">
+
+
+
+</head>
+
+<!-- Ícono que aparece en la pestaña del navegador -->
+<link rel="icon" type="image/x-icon" href="Img/Logo Aaron.png">
+
+<body>
+
+  <!-- NAVBAR (barra de navegación principal) -->
+  <nav class="navbar">
+    <!-- Logo de la empresa con link a principal.html -->
+    <div class="navbar-logo">
+      <a href="principal.html">
+        <img src="Img/Logo Aaron.png" alt="Logo">
+      </a>
+    </div>
+
+    <!-- Botón Hamburguesa (solo en móvil/tablet) -->
+    <div class="menu-btn" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Enlaces de navegación -->
+    <div class="navbar-nav" id="menu">
+      <a href="principal.html">Inicio</a>
+      <a href="principal.html#ofertas">Ofertas</a>
+      <a href="principal.html#nosotros">Nosotros</a>
+      <a href="principal.html#opiniones">Opiniones</a>
+      <a href="principal.html#contacto">Contacto</a>
+    </div>
+
+    <!-- Ícono flotante del carrito -->
+    <div id="cart-icon">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count">0</span>
+    </div>
+
+    <!-- Overlay de fondo -->
+    <div id="cart-overlay"></div>
+
+    <!-- Panel lateral del carrito -->
+    <div id="cart-panel" class="cart-panel">
+      <div class="cart-header">
+        <div class="cart-header-left">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h3>Tu carrito</h3>
+          <span id="cart-count-inline">0</span>
+        </div>
+        <button id="cart-close" class="cart-close">&times;</button>
+      </div>
+
+      <ul id="cart-items"></ul>
+
+      <div class="cart-footer">
+        <div class="cart-subtotal">
+          <span>Subtotal:</span>
+          <strong>R$<span id="cart-total">0</span></strong>
+        </div>
+        <button id="cart-send">Finalizar compra</button>
+        <button id="cart-clear">Vaciar carrito</button>
+      </div>
+    </div>
+
+
+
+  </nav>
+
+
+  <header>
+    <h1 class="titulos-grande titulos-light">Alojamientos en Buzios</h1>
+  </header>
+
+  <div class="search-filter">
+    <input type="text" id="search" placeholder="Buscar alojamiento...">
+    <select id="filterTipo">
+      <option value="">Tipo de alojamiento</option>
+      <option value="Pousada">Pousada</option>
+      <option value="Apartamento">Apartamento</option>
+    </select>
+    <select id="filterPersonas">
+      <option value="">Cantidad de personas</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+    </select>
+  </div>
+
+  <div class="container" id="alojamientos">
+    <div class="card" data-name="Pousada Kundalini" data-tipo="Pousada" data-personas="1,2,3"
+      data-category="alojamientos" data-options='[{"Noches": ["3", "4", "5"]}, {"Personas": ["1", "2", "3"]}]'
+      data-images='["Img/alojamientos/buzios/posada kaudini/posada kaudini-1.jpg", "Img/alojamientos/buzios/posada kaudini/posada kaudini-2.jpg", "Img/alojamientos/buzios/posada kaudini/posada kaudini-3.jpg"]'
+      data-description="Una pousada tranquila y acogedora a pocos metros de la playa. Incluye desayuno.">
+      <img class="open-modal-trigger" src="Img/alojamientos/buzios/posada kaudini/posada kaudini-1.jpg"
+        alt="Pousada Kundalini">
+      <div class="card-content">
+        <h3>Pousada Kundalini</h3>
+        <p>Capacidad: 1 - 3 personas</p>
+      </div>
+    </div>
+
+    <div class="card" data-name="Apartamento Ambar" data-tipo="Apartamento" data-personas="1,2,3"
+      data-category="alojamientos" data-options='[{"Noches": ["3", "4", "5"]}, {"Personas": ["1", "2", "3"]}]'
+      data-images='["Img/alojamientos/buzios/apartamento ambar/ambar-3.webp", "Img/alojamientos/buzios/apartamento ambar/ambar-1.jpg" ]'
+      data-description="Moderno apartamento totalmente equipado con vista al mar. Cerca de bares y restaurantes.">
+      <img class="open-modal-trigger" src="Img/alojamientos/buzios/apartamento ambar/ambar-3.webp"
+        alt="Apartamento Ambar">
+      <div class="card-content">
+        <h3>Apartamento Ambar</h3>
+        <p>Capacidad: 1 - 3 personas</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-options" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-description" class="modal-description"></p>
+
+      <div class="modal-gallery">
+        <button class="modal-nav-button prev-slide">&#10094;</button>
+        <div class="modal-slides-container">
+        </div>
+        <button class="modal-nav-button next-slide">&#10095;</button>
+      </div>
+
+      <div class="modal-options-container">
+      </div>
+      <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
+      <button id="add-to-cart-modal">Agregar al carrito</button>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="footer-content">
+      <div class="social-logos">
+        <a href="https://wa.me/+5521992608622"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/aaroninrio"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/aaroninrio?igsh=a3Azand1a2w5ZzZ6"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@aaron.in.rio?_t=ZM-8z4DXJ8lK9W"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+      <div class="footer-menu">
+        <a href="principal.html">Inicio</a>
+        <a href="principal.html#ofertas">Ofertas</a>
+        <a href="principal.html#nosotros">Nosotros</a>
+        <a href="principal.html#opiniones">Opiniones</a>
+        <a href="principal.html#contacto">Contacto</a>
+      </div>
+
+      <div class="contact-column">
+        <p><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
+        <p><i class="fab fa-whatsapp"></i> +55 2 1992608622</p>
+        <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
+      </div>
+
+      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por </p>
+    </div>
+
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/5491156213704" target="_blank" class="whatsapp-float" id="whatsappButton">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Globito de mensaje -->
+    <div class="whatsapp-bubble" id="whatsappBubble">
+      ¿Tenés dudas? ¡Consultanos!
+    </div>
+  </footer>
+
+
+  <script src="js/filtroAlojamientos.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- Se define el documento como HTML5 y el idioma como español -->
+
+<head>
+  <meta charset="UTF-8"> <!-- Codificación de caracteres para soportar tildes, ñ, etc. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que la página sea responsive -->
+  <title>Aaron In Rio</title> <!-- Título que aparece en la pestaña del navegador -->
+  <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al archivo CSS externo -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!--ICONOS-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
+    rel="stylesheet">
+
+
+</head>
+
+<!-- Ícono que aparece en la pestaña del navegador -->
+<link rel="icon" type="image/x-icon" href="Img/Logo Aaron.png">
+
+<body>
+
+  <!-- NAVBAR (barra de navegación principal) -->
+  <nav class="navbar">
+    <!-- Logo de la empresa con link a principal.html -->
+    <div class="navbar-logo">
+      <a href="principal.html">
+        <img src="Img/Logo Aaron.png" alt="Logo">
+      </a>
+    </div>
+    <!-- Botón Hamburguesa (solo en móvil/tablet) -->
+    <div class="menu-btn" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Enlaces de navegación -->
+    <div class="navbar-nav" id="menu">
+
+      <a href="principal.html">Inicio</a>
+      <a href="Ofertas.html">Ofertas</a>
+      <a href="principal.html#nosotros">Nosotros</a>
+      <a href="principal.html#opiniones">Opiniones</a>
+      <a href="principal.html#contacto">Contacto</a>
+
+    </div>
+
+    <!-- Ícono flotante del carrito -->
+    <div id="cart-icon">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count">0</span>
+    </div>
+
+    <!-- Overlay de fondo -->
+    <div id="cart-overlay"></div>
+
+    <!-- Panel lateral del carrito -->
+    <div id="cart-panel" class="cart-panel">
+      <div class="cart-header">
+        <div class="cart-header-left">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h3>Tu carrito</h3>
+          <span id="cart-count-inline">0</span>
+        </div>
+        <button id="cart-close" class="cart-close">&times;</button>
+      </div>
+
+      <ul id="cart-items"></ul>
+
+      <div class="cart-footer">
+        <div class="cart-subtotal">
+          <span>Subtotal:</span>
+          <strong>R$<span id="cart-total">0</span></strong>
+        </div>
+        <button id="cart-send">Finalizar compra</button>
+        <button id="cart-clear">Vaciar carrito</button>
+      </div>
+    </div>
+
+
+
+  </nav>
+
+
+  <!-- CAROUSEL principal de imágenes -->
+  <section class="hero-carousel">
+    <div class="carousel-slides">
+
+      <!-- Slide 1 -->
+      <div class="carousel-slide active">
+
+        <img src="Img/excursiones/rio/1.png" alt="Cristo Redentor">
+        <div class="carousel-content">
+          <h1>Disfruta de Brasil</h1>
+          <p>Descubre la magia de Brasil en cada viaje</p>
+          <a href="#destinos" class="btn">Explorar</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-slide">
+        <img src="Img/excursiones/buzios/rio/rio-playa1.jpg" alt="Playa de Copacabana">
+        <div class="carousel-content">
+          <h1>Maravillas de Brasil</h1>
+          <p>Descubre los destinos más impresionantes</p>
+          <a href="#destinos" class="btn">Ver destinos</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-slide">
+        <img src="Img/paisajes/fernando-de-noronha.jpg" alt="Fernando de Noronha">
+        <div class="carousel-content">
+          <h1>Paraíso Tropical</h1>
+          <p>Experimenta la belleza natural de Brasil</p>
+          <a href="#destinos" class="btn">Ver ofertas</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de navegación del carrusel -->
+    <div class="carousel-nav">
+      <button class="carousel-button prev">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel-button next">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Indicadores circulares del carrusel -->
+    <div class="carousel-dots">
+      <div class="carousel-dot active"></div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-dot"></div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN POR QUÉ ELEGIRNOS -->
+  <section id="por-que-elegirnos" class="elegirnos-section">
+    <div class="container">
+      <h2 class="section-title titulos-deco">Por qué elegirnos</h2>
+      <p class="section-subtitle  titulos-grande">Viajá con confianza, seguridad y atención real</p>
+
+      <div class="elegirnos-grid">
+        <!-- 1 -->
+        <div class="elegirnos-card">
+          <div class="icon"><i class="fa-solid fa-file-circle-check"></i></div>
+          <h3>Información verificada</h3>
+          <p>Asesoría confiable y transparente para viajar sin preocupaciones</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="elegirnos-card">
+          <div class="icon"><i class="fa-solid fa-credit-card"></i></div>
+          <h3>Pagos seguros</h3>
+          <p>Cuotas sin interés y compras protegidas para tu tranquilidad
+          </p>
+        </div>
+
+        <!-- 3 -->
+        <div class="elegirnos-card">
+          <div class="icon"><i class="fa-solid fa-headset"></i></div>
+          <h3>Atención personalizada</h3>
+          <p>Asesores reales que te acompañan en todo momento</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="elegirnos-card">
+          <div class="icon"><i class="fa-solid fa-earth-americas"></i></div>
+          <h3>Experiencia local</h3>
+          <p>Conocemos Brasil en profundidad y te guiamos con confianza</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Sección de Alojamientos -->
+  <section id="destinos">
+    <h2 class="section-title titulos-grande">Alojamientos </h2>
+    <div class="cards">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <a href="AlojamientosCopacabana.html" class="card">
+          <img src="Img/alojamientos/copacabana/copacabana2.jpg" alt="Destino 1">
+        </a>
+        <h3>Copacabana</h3>
+        <p>La famosa playa de Río de Janeiro, reconocida por su icónico paseo marítimo y su vibrante energía.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <a href="AlojamientosBuzios.html" class="card">
+          <img src="Img/alojamientos/buzios/buzios1.png" alt="Destino 2">
+        </a>
+        <h3>Buzios</h3>
+        <p>Un paraíso con más de 365 islas y playas de aguas cristalinas en la costa de Brasil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Excursiones -->
+  <section id="Tours">
+    <h2 class="section-title titulos-grande">Excurciones increibles</h2>
+    <div class="cards">
+
+      <!-- Excursión 1 -->
+      <div class="card">
+        <a href="ExcurcionesRio.html" class="card">
+          <img src="Img/excursiones/rio/1.png" alt="Tour 1">
+        </a>
+        <h3>Río de Janeiro</h3>
+        <p>Playas, carnaval y el Cristo Redentor.</p>
+      </div>
+
+      <!-- Excursión 2 -->
+      <div class="card">
+        <a href="ExcurcionesBuzios.html" class="card">
+          <img src="Img/excursiones/buzios/arraial/arraial-do-cabo3.jpg" alt="Tour 2">
+        </a>
+        <h3>Buzios</h3>
+        <p>Un paraíso con más de 365 islas y playas de aguas cristalinas en la costa de Brasil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Traslados -->
+  <section id="traslados">
+    <h2 class="section-title titulos-grande">Traslados Disponibles</h2>
+    <div class="cards">
+      <!-- Traslado Interno -->
+      <div class="card">
+        <a href="trasladosInternos.html">
+          <img src="Img/traslados/bote1.jpeg" alt="Internos">
+        </a>
+        <h3>Internos</h3>
+        <p>Dentro de la Ciudad.</p>
+      </div>
+      <!-- Traslado Externo -->
+      <div class="card">
+        <a href="trasladosexternos.html">
+          <img src="Img/traslados/crucero1.jpeg" alt="Externos">
+        </a>
+        <h3>Externos</h3>
+        <p>Ciudad en Ciudad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Ofertas -->
+  <section id="ofertas">
+    <h2 class="section-title titulos-grande">Ofertas Exclusivas</h2>
+    <div class="cards">
+
+      <!-- Oferta 1 -->
+      <div class="card" data-name="Paquete Buzios" data-price="1200" data-category="ofertas"
+        data-options='[{"Cantidad de personas": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Más de 10"]}]'
+        data-images='["img/ofertaX.jpg", "Img/Buzios.jpg", "Img/Cabo Frio-1920x1080.jpg"]'
+        data-description="Paquete de alojamiento y traslados con descuento. Disfruta de una estadía en Buzios sin preocupaciones.">
+
+        <img class="open-modal-trigger" src="img/ofertaX.jpg" alt="Oferta 1">
+        <div class="card-content">
+          <h3>Paquete Buzios: Alojamiento + Traslado</h3>
+          <p>Incluye 4 noches en Buzios + traslados de aeropuerto.</p>
+          <p class="offer-price">Precio: R$1200</p>
+        </div>
+      </div>
+
+      <!-- Oferta 2 -->
+      <div class="card" data-name="Traslado Privado + City Tour" data-price="350" data-category="ofertas"
+        data-options='[{"Tipo": ["Traslado Aeropuerto", "Traslado Intercity"]}]'
+        data-images='["Img/trasaladospriv2.jpg", "Img/trasaladospriv.jpg", "Img/Rio de Janeiro.jpg"]'
+        data-description="Contrata un traslado privado y obtén un tour gratuito por las playas de Copacabana.">
+
+        <img class="open-modal-trigger" src="Img/trasaladospriv2.jpg" alt="Oferta 2">
+        <div class="card-content">
+          <h3>Traslado Privado + City Tour Gratuito</h3>
+          <p>Contrata un traslado privado y obtén un tour a pie por Copacabana.</p>
+          <p class="offer-price">Precio: R$350</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón para ver más ofertas -->
+    <div class="ver-mas-container">
+      <a href="ofertas.html" class="ver-mas-btn">Ver más</a>
+    </div>
+  </section>
+
+  <!-- Modal (ventana emergente) para detalles de ofertas -->
+  <div id="modal-options" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span> <!-- Botón cerrar -->
+      <h2 id="modal-title"></h2>
+      <p id="modal-description" class="modal-description"></p>
+
+      <!-- Galería de imágenes dentro del modal -->
+      <div class="modal-gallery">
+        <button class="modal-nav-button prev-slide">&lt;</button>
+        <div class="modal-slides-container"></div>
+        <button class="modal-nav-button next-slide">&gt;</button>
+      </div>
+
+      <!-- Opciones dinámicas de la oferta -->
+      <div class="modal-options-container"></div>
+
+      <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
+      <button id="add-to-cart-modal">Agregar al carrito</button>
+    </div>
+  </div>
+
+  <!-- SOBRE NOSOTROS -->
+
+  <section id="nosotros">
+    <h2 class="section-title titulos-deco">Sobre Nosotros</h2>
+    <div class="about-container">
+      <div class="about-image">
+        <img src="Img/Nosotros.jpg" alt="Equipo de Aaron In Rio">
+      </div>
+
+      <div class="about-text">
+
+        <p>
+          <strong>Aaron In Rio</strong> nació de una pasión compartida: viajar, conectar con personas y
+          descubrir el alma de Brasil.
+        </p>
+        <p>
+          Lo que empezó como un grupo de amigos apasionados por las playas y la cultura brasileña,
+          creció hasta convertirse en una agencia donde cada viaje se planifica con conocimiento local
+          y atención personalizada.
+        </p>
+        <p>
+          Hoy, acompañamos a cientos de viajeros a vivir Brasil desde adentro,
+          con la tranquilidad de contar con asesores que conocen cada destino,
+          hablan el idioma y están ahí para vos en cada paso.
+        </p>
+        <p class="about-cta">
+          <em>No solo organizamos viajes, te abrimos acompañamos y facilitamos tu camino a Brasil. </em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Apartado de Asesores -->
+  <section class="asesores ">
+    <h2 class="titulos-grande">Nuestros Asesores de Viajes</h2>
+    <div class="asesores-cards">
+      <!-- Tarjetas de asesores -->
+      <div class="asesor-card">
+        <img src="Img/Candelaasesora.jpg" alt="Asesor 1">
+        <h3>Candela</h3>
+        <p>Asesora de Ventas</p>
+      </div>
+      <div class="asesor-card">
+        <img src="Img/Solasesora.jpg" alt="Asesor 2">
+        <h3>Sol</h3>
+        <p>Asesora de Ventas</p>
+      </div>
+      <div class="asesor-card">
+        <img src="Img/AaronCeo.jpg" alt="Asesor 3">
+        <h3>Aaron</h3>
+        <p>CEO - Asesor de Ventas</p>
+      </div>
+      <div class="asesor-card">
+        <img src="Img/Josefinaasesora.jpg" alt="Asesor 4">
+        <h3>Josefina</h3>
+        <p>Asesora de Ventas</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section id=opiniones class="opiniones-carousel section-title">
+    <h2 class="titulos-deco section-title">Opiniones</h2>
+    <!-- Los slides se generan por JS -->
+    <button class="prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <button class="lightbox-prev"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="lightbox-content"></div>
+    <button class="lightbox-next"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+
+
+  <!-- Sección de Opiniones -->
+  <section id="reviews" class="reviews-section">
+    <h2 class="titulos-grande section-title">Deja tu opinión</h2>
+    <form id="review-form">
+      <!-- Nombre -->
+      <div>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <!-- Email -->
+      <div>
+        <label for="email">Email (opcional):</label>
+        <input type="email" id="email" name="email">
+      </div>
+
+      <!-- locacion -->
+      <div>
+        <label for="locacion">Nacionalidad (opcional):</label>
+        <input type="locacion" id="locacion" name="locacion">
+      </div>
+      <!-- Calificación -->
+      <div>
+        <label for="rating">Calificación:</label>
+        <select id="rating" name="rating" required>
+          <option value="">Selecciona</option>
+          <option value="1">1 ⭐</option>
+          <option value="2">2 ⭐⭐</option>
+          <option value="3">3 ⭐⭐⭐</option>
+          <option value="4">4 ⭐⭐⭐⭐</option>
+          <option value="5">5 ⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <!-- Comentario -->
+      <div>
+        <label for="comment">Comentario:</label>
+        <textarea id="comment" name="comment" rows="4" required></textarea>
+      </div>
+      <!-- Subir archivos -->
+      <div class="file-upload">
+        <label for="files" class="custom-file-label">Subir imágenes o Videos</label>
+        <input type="file" id="files" name="files" multiple accept="image/*,video/*">
+      </div>
+      <!-- Lista de archivos cargados -->
+      <div id="file-list-container">
+        <ul id="file-list"></ul>
+      </div>
+      <!-- Botón enviar -->
+      <button type="submit">Enviar comentario</button>
+    </form>
+  </section>
+
+  <!--  Preguntas Frecuentes -->
+  <section class="faq-section">
+    <h2 class="titulos-grande">Preguntas frecuentes</h2>
+
+    <details>
+      <summary>¿De dónde son?</summary>
+      <p>Somos una empresa con asesores expertos repartidos por Argentina y Brasil. Nuestro
+        propósito es estar siempre al alcance, creciendo con fuerza para ofrecer empeño y calidad en cada servicio.
+      </p>
+    </details>
+
+    <details>
+      <summary>¿Cuánto valen los viajes?</summary>
+      <p>Los valores varían según la fecha, destino y cantidad de pasajeros. Podés ver las diferentes opciones
+        seleccionando el pack que desees, si tenes alguna duda adicional podes consultar por WhatsApp para
+        recibir una atención personalizada.</p>
+    </details>
+
+    <details>
+      <summary>¿Existen descuentos disponibles?</summary>
+      <p>Sí, contamos con promociones por temporada, descuentos por grupos y beneficios exclusivos para clientes
+        frecuentes.</p>
+    </details>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="footer-content">
+      <div class="social-logos">
+        <a href="https://wa.me/+5521992608622"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/aaroninrio"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/aaroninrio?igsh=a3Azand1a2w5ZzZ6"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@aaron.in.rio?_t=ZM-8z4DXJ8lK9W"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+      <div class="footer-menu">
+        <a href="principal.html">Inicio</a>
+        <a href="principal.html#ofertas">Ofertas</a>
+        <a href="principal.html#nosotros">Nosotros</a>
+        <a href="principal.html#opiniones">Opiniones</a>
+        <a href="principal.html#contacto">Contacto</a>
+      </div>
+
+      <div class="contact-column">
+        <p><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
+        <p><i class="fab fa-whatsapp"></i> +55 2 1992608622</p>
+        <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
+      </div>
+
+      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por </p>
+    </div>
+
+    <!-- Botón flotante WhatsApp -->
+    <a href="#" target="_blank" class="whatsapp-float" id="whatsappButton">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Globito de mensaje -->
+    <div class="whatsapp-bubble" id="whatsappBubble">
+      ¿Tenés dudas? ¡Consultanos!
+    </div>
+  </footer>
+
+
+  <!-- Modal oculto para login de administrador -->
+  <div id="admin-login-modal" class="login-modal">
+    <div class="login-box">
+      <h3>Acceso de Administrador</h3>
+      <input type="password" id="admin-password" placeholder="Contraseña">
+      <button id="admin-login-btn">Entrar</button>
+      <button id="admin-cancel-btn">Cancelar</button>
+      <p id="admin-login-error" class="error-msg"></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <!--  <script src="js/sliderVideo.js"></script>-->
+  <script src="js/cart.js"></script>
+
+  <!-- Luego el sistema de comentarios y carrusel -->
+  <script src="JS/coment.js"></script>
+
+</body>
+
+</html>
