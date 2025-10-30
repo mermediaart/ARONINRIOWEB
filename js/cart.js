@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
           cartOverlay.classList.remove("active");
 
           // --- Ir a la sección de ofertas ---
-          window.location.href = "principal.html#ofertas";
+          window.location.href = "index.html#ofertas";
         });
 
         document.querySelector(".cart-footer").appendChild(viewOffersBtn);
