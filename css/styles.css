@@ -1649,7 +1649,7 @@ SECCIÓN PREGUNTAS FRECUENTES + FOOTER
   background: var(--primary);
   color: var(--light);
   text-align: center;
-  padding: 1rem 1rem 1rem;
+  padding: 1rem 1rem 0.5rem;
   margin: 0;
   min-height: 20vh; /* ocupa parte de la pantalla */
   display: flex;
