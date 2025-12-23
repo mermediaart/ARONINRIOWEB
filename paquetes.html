@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traslados Externos</title>
-    <link rel="stylesheet" href="css/traslados.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Paquetes Exclusivos</title>
+    <link rel="stylesheet" href="css/Alojamientos.css">
+    <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al archivo CSS externo -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!--ICONOS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,12 @@
         href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
         rel="stylesheet">
 
-
 </head>
 
 <!-- Ícono que aparece en la pestaña del navegador -->
 <link rel="icon" type="image/x-icon" href="Img/Logo Aaron.png">
 
-<body class="traslados-externos-theme">
+<body class="paquete-theme">
 
     <!-- NAVBAR (barra de navegación principal) -->
     <nav class="navbar">
@@ -53,7 +52,7 @@
             <i class="fa-solid fa-cart-shopping"></i>
             <span id="cart-count">0</span>
         </div>
-
+ 
         <!-- Overlay de fondo -->
         <div id="cart-overlay"></div>
 
@@ -81,66 +80,63 @@
         </div>
 
 
-
     </nav>
 
     <header>
-        <h1 class="titulos-grande titulos-light">Traslados Externos</h1>
+        <h1 class="titulos-grande titulo-light">Paquetes Exclusivos</h1>
     </header>
 
     <div class="search-filter">
-        <input type="text" id="search" placeholder="Buscar traslado...">
+        <input type="text" id="search" placeholder="Buscar Paquete...">
         <select id="filterTipo">
-            <option value="">Destino</option>
-            <option value="Aeropuerto">Aeropuerto</option>
-            <option value="Ciudad">Ciudad</option>
+            <option value="">Tipo de alojamiento</option>
+            <option value="Pousada">Pousada</option>
+            <option value="Apartamento">Apartamento</option>
         </select>
     </div>
 
-    <div class="container" id="excursiones">
-        <div class="card" data-name="Traslado Buzios - Rio (GIG)" data-price="120" data-category="traslados"
-            data-tipo="Aeropuerto"
+    <div class="container">
+
+        <div class="card" data-name="Paquete Buzios" data-price="1200" data-category="ofertas"
             data-options='[{"Cantidad de personas": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Más de 10"]}]'
-            data-images='["Img/traslados/crucero1.jpeg", "Img/traslados/bote1.jpeg", "Img/traslados/bote2.jpeg"]'
-            data-description="Traslado directo y cómodo desde Buzios al Aeropuerto Internacional de Río de Janeiro (GIG).">
-            <img src="Img/traslados/bote2.jpeg" alt="Traslado Buzios a Rio (GIG)">
+            data-images='["img/ofertaX.jpg", "Img/Buzios.jpg", "Img/Cabo Frio-1920x1080.jpg"]'
+            data-description="Paquete de alojamiento y traslados con descuento. Disfruta de una estadía en Buzios sin preocupaciones.">
+            <img class="open-modal-trigger" src="img/ofertaX.jpg" alt="Oferta 1">
             <div class="card-content">
-                <h3>Traslado Buzios - Rio (GIG)</h3>
-                <p>Destino: Aeropuerto GIG</p>
-                <p>Duración: ~3 horas</p>
-                <p>Precio por persona: R$120</p>
+                <h3>Paquete Buzios: Alojamiento + Traslado</h3>
+                <p>Incluye 4 noches en Buzios + traslados de aeropuerto.</p>
+                <p class="offer-price">Precio: R$1200</p>
             </div>
         </div>
 
-        <div class="card" data-name="Traslado Buzios - Arraial do Cabo" data-price="50" data-category="traslados"
-            data-tipo="Ciudad"
-            data-options='[{"Cantidad de personas": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Más de 10"]}]'
-            data-images='["Img/traslados/crucero1.jpeg", "Img/traslados/bote1.jpeg", "Img/traslados/bote2.jpeg"]'
-            data-description="Servicio de traslado privado a las hermosas playas de Arraial do Cabo.">
-            <img src="Img/traslados/crucero1.jpeg" alt="Traslado Buzios a Arraial do Cabo">
+        <div class="card" data-name="Traslado Privado + City Tour" data-price="350" data-category="ofertas"
+            data-options='[{"Tipo": ["Traslado Aeropuerto", "Traslado Intercity"]}]'
+            data-images='["Img/trasaladospriv2.jpg", "Img/trasaladospriv.jpg", "Img/Rio de Janeiro.jpg"]'
+            data-description="Contrata un traslado privado y obtén un tour gratuito por las playas de Copacabana.">
+            <img class="open-modal-trigger" src="Img/trasaladospriv2.jpg" alt="Oferta 2">
             <div class="card-content">
-                <h3>Traslado Buzios - Arraial do Cabo</h3>
-                <p>Destino: Arraial do Cabo</p>
-                <p>Duración: ~1 hora</p>
-                <p>Precio por persona: R$50</p>
+                <h3>Traslado Privado + City Tour Gratuito</h3>
+                <p>Contrata un traslado privado y obtén un tour a pie por Copacabana.</p>
+                <p class="offer-price">Precio: R$350</p>
             </div>
         </div>
-
-        <div class="card" data-name="Traslado Rio (GIG) - Buzios" data-price="120" data-category="traslados"
-            data-tipo="Aeropuerto"
-            data-options='[{"Cantidad de personas": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Más de 10"]}]'
-            data-images='["Img/traslados/bote1.jpeg", "Img/traslados/bote2.jpeg"]'
-            data-description="Traslado directo desde el Aeropuerto Internacional de Río de Janeiro (GIG) a Buzios.">
-            <img src="Img/traslados/bote1.jpeg" alt="Traslado Rio a Buzios">
+        <div class="card" data-name="Traslado Privado + City Tour" data-price="350" data-category="ofertas"
+            data-options='[{"Tipo": ["Traslado Aeropuerto", "Traslado Intercity"]}]'
+            data-images='["Img/trasaladospriv2.jpg", "Img/trasaladospriv.jpg", "Img/Rio de Janeiro.jpg"]'
+            data-description="Contrata un traslado privado y obtén un tour gratuito por las playas de Copacabana.">
+            <img class="open-modal-trigger" src="Img/trasaladospriv2.jpg" alt="Oferta 2">
             <div class="card-content">
-                <h3>Traslado Rio (GIG) - Buzios</h3>
-                <p>Destino: Buzios</p>
-                <p>Duración: ~3 horas</p>
-                <p>Precio por persona: R$120</p>
+                <h3>Traslado Privado + City Tour Gratuito</h3>
+                <p>Contrata un traslado privado y obtén un tour a pie por Copacabana.</p>
+                <p class="offer-price">Precio: R$350</p>
             </div>
         </div>
     </div>
 
+
+
+
+    <!-- MODAL (copiado de Alojamientos) -->
     <div id="modal-options" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -149,18 +145,16 @@
 
             <div class="modal-gallery">
                 <button class="modal-nav-button prev-slide">&#10094;</button>
-                <div class="modal-slides-container">
-                </div>
+                <div class="modal-slides-container"></div>
                 <button class="modal-nav-button next-slide">&#10095;</button>
             </div>
 
-            <div class="modal-options-container">
-            </div>
-
+            <div class="modal-options-container"></div>
             <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
             <button id="add-to-cart-modal">Agregar al carrito</button>
         </div>
     </div>
+
     <!-- FOOTER -->
     <footer id="contacto">
         <div class="footer-content">
@@ -199,8 +193,9 @@
             ¿Tenés dudas? ¡Consultanos!
         </div>
     </footer>
+
+
     <script src="js/script.js"></script>
-    <script src="js/filtroTraslados.js"></script>
     <script src="js/cart.js"></script>
 
 </body>

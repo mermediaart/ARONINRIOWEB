@@ -13,7 +13,21 @@
     href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
     rel="stylesheet">
 
+  <script src="https://cdn.tailwindcss.com"></script>
 
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary-green': '#06d849',
+            'primary-blue': '#33e4e1',
+            'accent-yellow': '#FEDD00',
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
 <!-- Ícono que aparece en la pestaña del navegador -->
@@ -25,11 +39,10 @@
   <nav class="navbar">
     <!-- Logo de la empresa con link a principal.html -->
     <div class="navbar-logo">
-      <a href="index.html">
+      <a href="principal.html">
         <img src="Img/Logo Aaron.png" alt="Logo">
       </a>
     </div>
-
     <!-- Botón Hamburguesa (solo en móvil/tablet) -->
     <div class="menu-btn" id="menu-btn">
       <span></span>
@@ -39,11 +52,13 @@
 
     <!-- Enlaces de navegación -->
     <div class="navbar-nav" id="menu">
-     <a href="index.html">Inicio</a>
-      <a href="Ofertas.html">Ofertas</a>
-      <a href="index.html#nosotros">Nosotros</a>
-      <a href="index.html#opiniones">Opiniones</a>
-      <a href="index.html#contacto">Contacto</a>
+
+      <a href="principal.html">Inicio</a>
+      <a href="paquetes.html">Paquetes</a>
+      <a href="principal.html#nosotros">Nosotros</a>
+      <a href="principal.html#opiniones">Opiniones</a>
+      <a href="principal.html#contacto">Contacto</a>
+
     </div>
 
     <!-- Ícono flotante del carrito -->
@@ -82,106 +97,289 @@
 
   </nav>
 
+  <!-- HERO SECTION (Carrusel) -->
+  <section id="inicio">
+    <div class="hero-inner">
 
-  <!-- CAROUSEL principal de imágenes -->
-  <section class="hero-carousel">
-    <div class="carousel-slides">
+      <!-- Carrusel de Fondo -->
+      <div id="heroBgCarousel" class="absolute inset-0 w-full h-full -z-10">
+        <div class="bg-overlay"></div>
 
-      <!-- Slide 1 -->
-      <div class="carousel-slide active">
+        <!-- SLIDE 1 - Imagen responsiva -->
+        <picture class="hero-bg-slide active" data-bg-slide="0">
+          <source media="(min-width: 768px)" srcset="img/Test1.jpeg">
+          <img src="img/Test1.1.jpeg" alt="Río de Janeiro">
+        </picture>
 
-        <img src="Img/excursiones/rio/1.png" alt="Cristo Redentor">
-        <div class="carousel-content">
-          <h1>Disfruta de Brasil</h1>
-          <p>Descubre la magia de Brasil en cada viaje</p>
-          <a href="index.html#traslados" class="btn">Explorar</a>
-        </div>
+        <!-- SLIDE 2 - Imagen responsiva -->
+        <picture class="hero-bg-slide" data-bg-slide="1">
+          <source media="(min-width: 768px)" srcset="img/Test2.jpeg">
+          <img src="img/Test2.1.jpeg" alt="Playas de Buzios">
+        </picture>
+
+        <!-- SLIDE 3 - Imagen responsiva -->
+        <picture class="hero-bg-slide" data-bg-slide="2">
+          <source media="(min-width: 768px)" srcset="img/Test3.jpeg">
+          <img src="img/Test3.1.jpeg" alt="Crucero">
+        </picture>
       </div>
 
-      <!-- Slide 2 -->
-      <div class="carousel-slide">
-        <img src="Img/excursiones/buzios/rio/rio-playa1.jpg" alt="Playa de Copacabana">
-        <div class="carousel-content">
-          <h1>Maravillas de Brasil</h1>
-          <p>Descubre los destinos más impresionantes</p>
-          <a href="index.html#Tours" class="btn">Ver excursiones</a>
-        </div>
-      </div>
+      <!-- Contenedor Principal del Carrusel de Contenido -->
+      <div id="heroContentCarousel" class="mt-8">
 
-      <!-- Slide 3 -->
-      <div class="carousel-slide">
-        <img src="Img/paisajes/fernando-de-noronha.jpg" alt="Fernando de Noronha">
-        <div class="carousel-content">
-          <h1>Paraíso Tropical</h1>
-          <p>Experimenta la belleza natural de Brasil</p>
-          <a href="index.html#ofertas" class="btn">Ver ofertas</a>
+        <!-- Botón Anterior -->
+        <button id="hero-prev" class="hero-nav-arrow" aria-label="Anterior">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="rgba(0, 0, 0, 0.9)">
+            <path
+              d="M14.0656 4.9325L15.1263 5.99316L9.12254 11.9969L15.1325 18.0069L14.0719 19.0676L7.00122 11.9969L14.0656 4.9325Z"
+              fill="rgba(0, 0, 0, 0.9)"></path>
+          </svg>
+        </button>
+
+        <!-- Botón Siguiente -->
+        <button id="hero-next" class="hero-nav-arrow" aria-label="Siguiente">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="rgba(0, 0, 0, 0.9)"
+            style="transform: rotate(180deg);">
+            <path
+              d="M14.0656 4.9325L15.1263 5.99316L9.12254 11.9969L15.1325 18.0069L14.0719 19.0676L7.00122 11.9969L14.0656 4.9325Z"
+              fill="rgba(0, 0, 0, 0.9)"></path>
+          </svg>
+        </button>
+
+        <!-- SLIDE 0 (Contenido Principal - Activo por defecto) -->
+        <div data-content-slide="0" class="hero-content-slide active">
+          <div>
+            <picture>
+              <source media="(min-width: 768px)" srcset="img/Test1.jpeg">
+              <img src="img/Test1.1.jpeg" alt="Oferta 1">
+            </picture>
+          </div>
         </div>
+
+        <!-- SLIDE 1 -->
+        <div data-content-slide="1" class="hero-content-slide">
+          <div>
+            <picture>
+              <source media="(min-width: 768px)" srcset="img/Test2.jpeg">
+              <img src="img/Test2.1.jpeg" alt="Oferta 2">
+            </picture>
+          </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div data-content-slide="2" class="hero-content-slide">
+          <div>
+            <picture>
+              <source media="(min-width: 768px)" srcset="img/Test3.jpeg">
+              <img src="img/Test3.1.jpeg" alt="Oferta 3">
+            </picture>
+          </div>
+        </div>
+
+        <!-- NUEVO: INDICADORES -->
+        <div class="carousel-indicators">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+        </div>
+
+
+        <!-- SOLO EN MOVILES -->
+        <!-- MENÚ DE CATEGORÍAS -->
+        <section class="categories-menu">
+          <div class="categories-container">
+            <a href="#destinos" class="category-item">
+              <div class="category-icon">
+                <i class="fas fa-hotel"></i>
+              </div>
+              <span class="category-label">Alojamientos</span>
+            </a>
+            <a href="#Tours" class="category-item">
+              <div class="category-icon">
+                <i class="fas fa-umbrella-beach"></i>
+              </div>
+              <span class="category-label">Excursiones</span>
+            </a>
+            <a href="#traslados" class="category-item">
+              <div class="category-icon">
+                <i class="fas fa-car"></i>
+              </div>
+              <span class="category-label">Traslados</span>
+            </a>
+            <a href="#ofertas" class="category-item">
+              <div class="category-icon">
+                <i class="fas fa-suitcase-rolling"></i>
+              </div>
+              <span class="category-label">Paquetes</span>
+            </a>
+
+          </div>
+        </section>
+        <!-- FIN MENÚ DE CATEGORÍAS -->
+
+        <!-- Sección de Tarjetas de Beneficios (Estáticas) -->
+        <!-- NOTA: Esta sección ahora fluirá correctamente después del carrusel de contenido. -->
+        <div class="card-grid-hero max-w-7xl mx-auto px-3 sm:px-4 w-full z-20 mt-6 sm:mt-8">
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
+            <div
+              class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2  border-primary-green"
+              onclick="openModal('modal-info-verificada')">
+              <i
+                class="fa-solid fa-file-circle-check text-2xl sm:text-3xl md:text-4xl text-primary-green mb-1 sm:mb-2"></i>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Info Verificada</h3>
+              <p class="text-[10px] xs:text-xs text-gray-500">Asesoría confiable.</p>
+            </div>
+            <div
+              class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2  border-primary-blue"
+              onclick="openModal('modal-pagos-seguros')">
+              <i class="fa-solid fa-credit-card text-2xl sm:text-3xl md:text-4xl text-primary-blue mb-1 sm:mb-2"></i>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Pagos Seguros</h3>
+              <p class="text-[10px] xs:text-xs text-gray-500">Cuotas protegidas.</p>
+            </div>
+            <div
+              class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2  border-accent-yellow"
+              onclick="openModal('modal-atencion')">
+              <i class="fa-solid fa-headset text-2xl sm:text-3xl md:text-4xl text-accent-yellow mb-1 sm:mb-2"></i>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Atención 24/7</h3>
+              <p class="text-[10px] xs:text-xs text-gray-500">Asesores reales.</p>
+            </div>
+            <div
+              class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2  border-primary-green"
+              onclick="openModal('modal-experiencia')">
+              <i
+                class="fa-solid fa-earth-americas text-2xl sm:text-3xl md:text-4xl text-primary-green mb-1 sm:mb-2"></i>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Experiencia Local
+              </h3>
+              <p class="text-[10px] xs:text-xs text-gray-500">Conocemos Brasil.</p>
+            </div>
+            <div
+              class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2  border-primary-blue"
+              onclick="openModal('modal-viajes')">
+              <i
+                class="fa-solid fa-plane-departure text-2xl sm:text-3xl md:text-4xl text-primary-blue mb-1 sm:mb-2"></i>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Viajes Rápidos</h3>
+              <p class="text-[10px] xs:text-xs text-gray-500">Reservas en 24h.</p>
+            </div>
+            <div
+              class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2 border-accent-yellow"
+              onclick="openModal('modal-descuentos')">
+              <i class="fa-solid fa-percent text-2xl sm:text-3xl md:text-4xl text-accent-yellow mb-1 sm:mb-2"></i>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Descuentos</h3>
+              <p class="text-[10px] xs:text-xs text-gray-500">Hasta 40% OFF.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
+      <div class="hero-bottom-fade"></div>
     </div>
-
-    <!-- Botones de navegación del carrusel -->
-    <div class="carousel-nav">
-      <button class="carousel-button prev">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-      <button class="carousel-button next">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
-
-    <!-- Indicadores circulares del carrusel -->
-    <div class="carousel-dots">
-      <div class="carousel-dot active"></div>
-      <div class="carousel-dot"></div>
-      <div class="carousel-dot"></div>
     </div>
   </section>
 
-  <!-- SECCIÓN POR QUÉ ELEGIRNOS -->
-  <section id="por-que-elegirnos" class="elegirnos-section">
-    <div class="container">
-      <h2 class="section-title titulos-deco">Por qué elegirnos</h2>
-      <p class="section-subtitle  titulos-grande">Viajá con confianza, seguridad y atención real</p>
+  <div id="generic-modal" class="modal-overlay hidden">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
 
-      <div class="elegirnos-grid">
-        <!-- 1 -->
-        <div class="elegirnos-card">
-          <div class="icon"><i class="fa-solid fa-file-circle-check"></i></div>
-          <h3>Información verificada</h3>
-          <p>Asesoría confiable y transparente para viajar sin preocupaciones</p>
+      <div id="modal-content-wrapper">
+
+        <div id="modal-info-verificada" class="modal-content hidden modal-content-new">
+          <i class="fa-solid fa-file-circle-check text-5xl text-primary-green mb-5"></i>
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-gray-800 text-center">Información Verificada</h3>
+          <ul class="text-left text-gray-700 max-w-sm mx-auto w-full">
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-green mr-3 mt-1"></i><span
+                class="text-base font-medium">Trabajamos solo con proveedores certificados.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-green mr-3 mt-1"></i><span
+                class="text-base font-medium">Garantía de reservas 100% legítimas.</span></li>
+          </ul>
         </div>
 
-        <!-- 2 -->
-        <div class="elegirnos-card">
-          <div class="icon"><i class="fa-solid fa-credit-card"></i></div>
-          <h3>Pagos seguros</h3>
-          <p>Cuotas sin interés y compras protegidas para tu tranquilidad
-          </p>
+        <div id="modal-pagos-seguros" class="modal-content hidden modal-content-new">
+          <i class="fa-solid fa-file-circle-check text-5xl text-primary-blue mb-5"></i>
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-gray-800 text-center">Plataforma de Pagos Segura</h3>
+          <ul class="text-left text-gray-700 max-w-sm mx-auto w-full">
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
+                class="text-base font-medium">Transacciones protegidas con encriptación SSL.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
+                class="text-base font-medium">Opción de pagar en cuotas sin intereses.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
+                class="text-base font-medium">Aceptamos las principales tarjetas de crédito.</span></li>
+          </ul>
         </div>
 
-        <!-- 3 -->
-        <div class="elegirnos-card">
-          <div class="icon"><i class="fa-solid fa-headset"></i></div>
-          <h3>Atención personalizada</h3>
-          <p>Asesores reales que te acompañan en todo momento</p>
+        <div id="modal-atencion" class="modal-content hidden modal-content-new">
+          <i class="fa-solid fa-headset text-5xl text-accent-yellow mb-5"></i>
+          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-gray-800 text-center">Atención Personalizada 24/7</h3>
+          <ul class="text-left text-gray-700  max-w-sm mx-auto w-full">
+            <li class="flex items-center"><i class="fas fa-check-circle text-accent-yellow mr-3 mt-1"></i><span
+                class="text-base font-medium">Asesores reales que responden por WhatsApp.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-accent-yellow mr-3 mt-1"></i><span
+                class="text-base font-medium">Soporte antes, durante y después del viaje.</span></li>
+          </ul>
         </div>
 
-        <!-- 4 -->
-        <div class="elegirnos-card">
-          <div class="icon"><i class="fa-solid fa-earth-americas"></i></div>
-          <h3>Experiencia local</h3>
-          <p>Conocemos Brasil en profundidad y te guiamos con confianza</p>
+        <!-- Contenido Modal 4: Experiencia Local -->
+        <div id="modal-experiencia" class="modal-content hidden"> <i
+            class="fa-solid fa-headset text-5xl text-primary-green mb-5"></i>
+          <h3 class="text-2xl font-bold mb-8 text-gray-800">Nuestra Experiencia Local</h3>
+          <ul class="text-left text-gray-700 max-w-sm mx-auto w-full">
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-green mr-3 mt-1"></i><span
+                class="text-base font-medium">Somos
+                residentes en Brasil, conocemos la zona.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-green mr-3 mt-1"></i><span
+                class="text-base font-medium">Acceso a
+                precios directos de proveedores locales.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-green mr-3 mt-1"></i><span
+                class="text-base font-medium">Recomendaciones exclusivas y rutas
+                secretas.</span></li>
+          </ul>
         </div>
+
+        <!-- Contenido Modal 5: Viajes Rápidos -->
+        <div id="modal-viajes" class="modal-content hidden">
+          <i class="fa-solid fa-headset text-5xl text-primary-blue mb-5"></i>
+          <h3 class="text-2xl font-bold mb-8 text-gray-800">Reservas y Viajes Rápidos</h3>
+          <ul class="text-left text-gray-700 max-w-sm mx-auto w-full">
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
+                class="text-base font-medium">Confirmación de reservas en menos de
+                24 horas.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
+                class="text-base font-medium">Procesamiento de documentos
+                optimizado.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
+                class="text-base font-medium">Tu
+                aventura brasileña comienza sin demoras.</span></li>
+          </ul>
+        </div>
+
+        <!-- Contenido Modal 6: Descuentos -->
+        <div id="modal-descuentos" class="modal-content hidden">
+          <i class="fa-solid fa-percent text-4xl text-accent-yellow mb-6"></i>
+          <h3 class="text-2xl font-bold mb-8 text-gray-800">Grandes Descuentos y Ofertas</h3>
+          <ul class="text-left text-gray-700  max-w-sm mx-auto w-full">
+            <li class="flex items-center"><i class="fas fa-check-circle text-accent-yellow mr-3 mt-1"></i><span
+                class="text-base font-medium">Hasta 40%
+                OFF en paquetes seleccionados.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-accent-yellow mr-3 mt-1"></i><span
+                class="text-base font-medium">Precios
+                inigualables gracias a alianzas locales.</span></li>
+            <li class="flex items-center"><i class="fas fa-check-circle text-accent-yellow mr-3 mt-1"></i><span
+                class="text-base font-medium">Ofertas
+                exclusivas por temporada.</span></li>
+          </ul>
+        </div>
+
       </div>
     </div>
-  </section>
-
+  </div>
 
 
   <!-- Sección de Alojamientos -->
-  <section id="destinos">
+  <section id="destinos" class="pb-16 bg-gradient-to-b from-green-50 via-yellow-50 to-yellow-100">
+
     <h2 class="section-title titulos-grande">Alojamientos </h2>
-    <div class="cards">
+    <div class="flex flex-wrap justify-center gap-6 px-4 w-full mx-auto">
 
       <!-- Card 1 -->
       <div class="card">
@@ -204,7 +402,7 @@
   </section>
 
   <!-- Sección de Excursiones -->
-  <section id="Tours">
+  <section id="Tours" class="py-16 bg-gradient-to-b from-yellow-100 via-green-100 to-teal-100">
     <h2 class="section-title titulos-grande">Excurciones increibles</h2>
     <div class="cards">
 
@@ -229,7 +427,7 @@
   </section>
 
   <!-- Sección de Traslados -->
-  <section id="traslados">
+  <section id="traslados" class="py-16 bg-gradient-to-b from-teal-100 to-blue-100">
     <h2 class="section-title titulos-grande">Traslados Disponibles</h2>
     <div class="cards">
       <!-- Traslado Interno -->
@@ -251,18 +449,18 @@
     </div>
   </section>
 
-  <!-- Sección de Ofertas -->
-  <section id="ofertas">
-    <h2 class="section-title titulos-grande">Ofertas Exclusivas</h2>
+  <!-- Sección de Paquetes-->
+  <section id="ofertas" class="py-16 bg-gradient-to-b from-blue-100 via-grey to-white-50">
+    <h2 class="section-title titulos-grande">Paquetes Exclusivos</h2>
     <div class="cards">
 
       <!-- Oferta 1 -->
       <div class="card" data-name="Paquete Buzios" data-price="1200" data-category="ofertas"
         data-options='[{"Cantidad de personas": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Más de 10"]}]'
-        data-images='["Img/ofertaX.jpg", "Img/Buzios.jpg", "Img/Cabo Frio-1920x1080.jpg"]'
+        data-images='["img/ofertaX.jpg", "Img/Buzios.jpg", "Img/Cabo Frio-1920x1080.jpg"]'
         data-description="Paquete de alojamiento y traslados con descuento. Disfruta de una estadía en Buzios sin preocupaciones.">
 
-        <img class="open-modal-trigger" src="Img/ofertaX.jpg" alt="Oferta 1">
+        <img class="open-modal-trigger" src="img/ofertaX.jpg" alt="Oferta 1">
         <div class="card-content">
           <h3>Paquete Buzios: Alojamiento + Traslado</h3>
           <p>Incluye 4 noches en Buzios + traslados de aeropuerto.</p>
@@ -287,7 +485,7 @@
 
     <!-- Botón para ver más ofertas -->
     <div class="ver-mas-container">
-      <a href="Ofertas.html" class="ver-mas-btn">Ver más</a>
+      <a href="paquetes.html" class="ver-mas-btn">Ver más</a>
     </div>
   </section>
 
@@ -315,136 +513,199 @@
 
   <!-- SOBRE NOSOTROS -->
 
-  <section id="nosotros">
-    <h2 class="section-title titulos-deco">Sobre Nosotros</h2>
+  <section id="nosotros" class="py-16 bg-gradient-to-b from-white via-green-50 to-amber-50">
+    <h2 class="section-title titulos-deco text-gray-800">Sobre Nosotros</h2>
     <div class="about-container">
       <div class="about-image">
         <img src="Img/Nosotros.jpg" alt="Equipo de Aaron In Rio">
       </div>
 
-      <div class="about-text">
-
-        <p>
-          <strong>Aaron In Rio</strong> nació de una pasión compartida: viajar, conectar con personas y
+      <div class="about-text text-gray-700">
+        <p class="mb-4">
+          <strong class="text-green-600">Aaron In Rio</strong> nació de una pasión compartida: viajar, conectar con
+          personas y
           descubrir el alma de Brasil.
         </p>
-        <p>
+        <p class="mb-4">
           Lo que empezó como un grupo de amigos apasionados por las playas y la cultura brasileña,
           creció hasta convertirse en una agencia donde cada viaje se planifica con conocimiento local
           y atención personalizada.
         </p>
-        <p>
+        <p class="mb-4">
           Hoy, acompañamos a cientos de viajeros a vivir Brasil desde adentro,
           con la tranquilidad de contar con asesores que conocen cada destino,
           hablan el idioma y están ahí para vos en cada paso.
         </p>
-        <p class="about-cta">
-          <em>No solo organizamos viajes, te acompañamos y facilitamos tu camino a Brasil. </em>
+        <p class="about-cta text-amber-700 font-medium">
+          <em>No solo organizamos viajes, te abrimos acompañamos y facilitamos tu camino a Brasil.</em>
         </p>
       </div>
     </div>
   </section>
 
 
-  <!-- Apartado de Asesores -->
-  <section class="asesores ">
+  <section class="asesores py-16 bg-gradient-to-b from-amber-50 via-yellow-50 to-green-50">
     <h2 class="titulos-grande">Nuestros Asesores de Viajes</h2>
     <div class="asesores-cards">
-      <!-- Tarjetas de asesores -->
-      <div class="asesor-card">
-        <img src="Img/Candelaasesora.jpg" alt="Asesor 1">
+      <div class="asesor-card" class="cursor-pointer" onclick="verVideoAsesor('img/Candelaasesora1.mp4')">
+        <img src="Img/Candelaasesora.jpg" alt="Candela" class="cursor-pointer"
+          onclick="verVideoAsesor('img/Candelaasesora1.mp4')">
         <h3>Candela</h3>
         <p>Asesora de Ventas</p>
       </div>
-      <div class="asesor-card">
-        <img src="Img/Solasesora.jpg" alt="Asesor 2">
+      <div class="asesor-card" class="cursor-pointer" onclick="verVideoAsesor('img/Solasesora1.mp4')">
+        <img src="Img/Solasesora.jpg" alt="Sol" class="cursor-pointer" onclick="verVideoAsesor('img/Solasesora1.mp4')">
         <h3>Sol</h3>
         <p>Asesora de Ventas</p>
       </div>
-      <div class="asesor-card">
-        <img src="Img/AaronCeo.jpg" alt="Asesor 3">
+      <div class="asesor-card" class="cursor-pointer" onclick="verVideoAsesor('img/AaronCeo1.mp4')">
+        <img src="Img/AaronCeo.jpg" alt="Aaron" class="cursor-pointer" onclick="verVideoAsesor('img/AaronCeo1.mp4')">
         <h3>Aaron</h3>
         <p>CEO - Asesor de Ventas</p>
       </div>
-      <div class="asesor-card">
-        <img src="Img/Josefinaasesora.jpg" alt="Asesor 4">
+      <div class="asesor-card" class="cursor-pointer" onclick="verVideoAsesor('img/Josefinaasesora1.mp4')">
+        <img src="Img/Josefinaasesora.jpg" alt="Josefina" class="cursor-pointer"
+          onclick="verVideoAsesor('img/Josefinaasesora1.mp4')">
         <h3>Josefina</h3>
         <p>Asesora de Ventas</p>
       </div>
     </div>
   </section>
 
-
-  <section id=opiniones class="opiniones-carousel section-title">
-    <h2 class="titulos-deco section-title">Opiniones</h2>
-    <!-- Los slides se generan por JS -->
-    <button class="prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="next-btn"><i class="fa-solid fa-chevron-right"></i></button>
-  </section>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <span class="close">&times;</span>
-    <button class="lightbox-prev"><i class="fa-solid fa-chevron-left"></i></button>
-    <div class="lightbox-content"></div>
-    <button class="lightbox-next"><i class="fa-solid fa-chevron-right"></i></button>
+  <div id="videoAsesorModal" class="video-modal-overlay" onclick="cerrarVideoAsesor()">
+    <div class="video-modal-content" onclick="event.stopPropagation()">
+      <button class="video-modal-close" onclick="cerrarVideoAsesor()">&times;</button>
+      <video id="videoPlayerAsesor" controls playsinline>
+        <source src="" type="video/mp4">
+        Tu navegador no soporta videos.
+      </video>
+    </div>
   </div>
 
 
-  <!-- Sección de Opiniones -->
-  <section id="reviews" class="reviews-section">
-    <h2 class="titulos-grande section-title">Deja tu opinión</h2>
-    <form id="review-form">
-      <!-- Nombre -->
-      <div>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
+  <!-- Contenedor del Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+      <button id="lightboxClose" class="lightbox-close">
+        <i class="fas fa-times"></i>
+      </button>
+      <button id="lightboxPrev" class="lightbox-nav lightbox-prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div id="lightboxMediaContainer" class="w-full h-full flex items-center justify-center"></div>
+      <button id="lightboxNext" class="lightbox-nav lightbox-next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="lightbox-counter">
+        <span id="lightboxCounter">1 / 1</span>
       </div>
-      <!-- Email -->
-      <div>
-        <label for="email">Email (opcional):</label>
-        <input type="email" id="email" name="email">
-      </div>
+    </div>
+  </div>
 
-      <!-- locacion -->
-      <div>
-        <label for="locacion">Nacionalidad (opcional):</label>
-        <input type="locacion" id="locacion" name="locacion">
+  <!-- SECCIÓN OPINIONES -->
+  <section id="opiniones" class="py-24 bg-gradient-to-b from-green-50 to-yellow-50">
+    <div class="px-4 md:px-8">
+      <h2 class="titulos-grande">Opiniones</h2>
+
+      <div class="relative max-w-6xl mx-auto">
+        <button id="prevOpinionBtn"
+          class="opinion-arrow absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 bg-white hover:bg-primary-green text-primary-green hover:text-white border border-primary-green w-10 h-10 md:w-12 md:h-12 rounded-full shadow-lg flex items-center justify-center">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div id="currentOpinionContainer" class="opinion-content fade-in mx-8 md:mx-12">
+          <!-- Los comentarios se cargarán aquí mediante coment.js -->
+        </div>
+
+        <button id="nextOpinionBtn"
+          class="opinion-arrow absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 bg-white hover:bg-primary-green text-primary-green hover:text-white border border-primary-green w-10 h-10 md:w-12 md:h-12 rounded-full shadow-lg flex items-center justify-center">
+          <i class="fas fa-chevron-right"></i>
+        </button>
       </div>
-      <!-- Calificación -->
-      <div>
-        <label for="rating">Calificación:</label>
-        <select id="rating" name="rating" required>
-          <option value="">Selecciona</option>
-          <option value="1">1 ⭐</option>
-          <option value="2">2 ⭐⭐</option>
-          <option value="3">3 ⭐⭐⭐</option>
-          <option value="4">4 ⭐⭐⭐⭐</option>
-          <option value="5">5 ⭐⭐⭐⭐⭐</option>
-        </select>
+    </div>
+  </section>
+
+  <!-- SECCIÓN FORMULARIO -->
+  <section id="formulario-opinion" class="py-24 bg-gradient-to-b from-yellow-50 to-yellow-100">
+    <div class="max-w-2xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-6 text-gray-900">Comparte Tu Experiencia</h2>
+      <div
+        class="bg-white p-6 md:p-8 rounded-2xl  border-t-4 border-primary-green shadow-[0_25px_50px_-12px_rgba(0,0,0,0.12)] transform transition-all duration-500 hover:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.2)]">
+        <form id="opinionForm" class="opinion-form">
+          <div class="mb-6">
+            <div class="mb-4">
+              <label class="block text-base font-bold text-gray-800 mb-2">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"
+                class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg outline-none text-base focus:border-primary-green transition">
+            </div>
+            <div class="mb-4">
+              <label class="block text-base font-bold text-gray-800 mb-2">Email </label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com"
+                class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg outline-none text-base focus:border-primary-green transition">
+            </div>
+            <div class="mb-4">
+              <label class="block text-base font-bold text-gray-800 mb-2">Calificación </label>
+              <div class="rating-input bg-gray-50 p-3 rounded-lg border border-gray-300">
+                <div class="rating-stars" id="starRatingSystem">
+                  <input type="radio" id="star5" name="rating" value="5"><label for="star5"><i
+                      class="fas fa-star"></i></label>
+                  <input type="radio" id="star4" name="rating" value="4"><label for="star4"><i
+                      class="fas fa-star"></i></label>
+                  <input type="radio" id="star3" name="rating" value="3"><label for="star3"><i
+                      class="fas fa-star"></i></label>
+                  <input type="radio" id="star2" name="rating" value="2"><label for="star2"><i
+                      class="fas fa-star"></i></label>
+                  <input type="radio" id="star1" name="rating" value="1"><label for="star1"><i
+                      class="fas fa-star"></i></label>
+                </div>
+                <div class="mt-2 text-sm text-gray-600"><span id="ratingText" class="font-semibold">Excelente (5
+                    estrellas)</span><input type="hidden" id="rating" name="rating" value="5"></div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="comentario" class="block text-base font-bold text-gray-800 mb-2">Comentario </label>
+              <textarea id="comentario" name="comentario" rows="4" required placeholder="Escribe aquí tu comentario..."
+                maxlength="500"
+                class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg resize-y text-sm focus:border-primary-green transition"></textarea>
+              <div class="text-xs text-right text-gray-500 mt-1"><span id="charCount">0</span>/500</div>
+            </div>
+            <div class="mb-6">
+              <label class="block text-base font-bold text-gray-800 mb-2">Subir Fotos o Videos (Máximo 3)</label>
+              <div
+                class="file-upload-area border-2 border-dashed border-gray-300 rounded-xl p-6 text-center cursor-pointer relative bg-gray-50 hover:bg-gray-100 transition"
+                id="fileDropArea">
+                <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-2"></i>
+                <p class="text-sm font-bold text-gray-700">Click o arrastra (Máx. 3 archivos de hasta 200MB)</p>
+                <input type="file" id="fileInput" multiple accept="image/*,video/*"
+                  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+              </div>
+              <div class="file-preview-container grid grid-cols-3 gap-3 mt-4" id="filePreviewContainer"></div>
+            </div>
+            <div class="form-actions flex gap-3 pt-4 border-t">
+              <button type="submit" id="submitBtn"
+                class="flex-1 px-4 py-3 bg-gray-100 text-black font-bold rounded-lg hover:scale-105 transition-all hover:bg-green-600 hover:text-white transition shadow-md flex items-center justify-center">
+                <i class="fas fa-paper-plane mr-2"></i> Publicar
+              </button>
+              <button type="reset" id="clearBtn"
+                class="px-4 py-3 bg-gray-100 text-black font-bold rounded-lg hover:scale-105 transition-all hover:bg-red-600 hover:text-white transition shadow-md flex items-center justify-center">
+                <i class="fas fa-trash-alt mr-2"></i> Limpiar
+              </button>
+            </div>
+          </div>
+        </form>
+        <div id="successMessage" class="hidden p-8 bg-green-50 border border-green-200 rounded-2xl text-center mt-4">
+          <i class="fas fa-check-circle text-6xl text-primary-green mb-3"></i>
+          <h3 class="text-2xl font-bold mb-2">¡Opinión enviada!</h3>
+          <button id="newOpinionBtn" class="mt-4 px-6 py-2 bg-white border rounded-full font-bold">Escribir
+            otra</button>
+        </div>
       </div>
-      <!-- Comentario -->
-      <div>
-        <label for="comment">Comentario:</label>
-        <textarea id="comment" name="comment" rows="4" required></textarea>
-      </div>
-      <!-- Subir archivos -->
-      <div class="file-upload">
-        <label for="files" class="custom-file-label">Subir imágenes o Videos</label>
-        <input type="file" id="files" name="files" multiple accept="image/*,video/*">
-      </div>
-      <!-- Lista de archivos cargados -->
-      <div id="file-list-container">
-        <ul id="file-list"></ul>
-      </div>
-      <!-- Botón enviar -->
-      <button type="submit">Enviar comentario</button>
-    </form>
+    </div>
   </section>
 
   <!--  Preguntas Frecuentes -->
-  <section class="faq-section">
-    <h2 class="titulos-grande">Preguntas frecuentes</h2>
+  <section class="faq-section py-24 bg-gradient-to-b from-yellow-100 via-teal-400 to-gray-500">
+    <h2 class="titulos-grande text-black uppercase tracking-wide">Preguntas frecuentes</h2>
 
     <details>
       <summary>¿De dónde son?</summary>
@@ -478,16 +739,16 @@
       </div>
 
       <div class="footer-menu">
-           <a href="index.html">Inicio</a>
-                <a href="index.html#ofertas">Ofertas</a>
-                <a href="index.html#nosotros">Nosotros</a>
-                <a href="index.html#opiniones">Opiniones</a>
-                <a href="index.html#contacto">Contacto</a>
+        <a href="principal.html">Inicio</a>
+        <a href="principal.html#ofertas">Paquetes</a>
+        <a href="principal.html#nosotros">Nosotros</a>
+        <a href="principal.html#opiniones">Opiniones</a>
+        <a href="principal.html#contacto">Contacto</a>
       </div>
 
       <div class="contact-column">
         <p><i class="fas fa-map-marker-alt"></i> Buenos Aires, Argentina</p>
-        <p><i class="fab fa-whatsapp"></i> +54 9 11 4079-1494</p>
+        <p><i class="fab fa-whatsapp"></i> +55 2 1992608622</p>
         <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
       </div>
 
@@ -522,7 +783,15 @@
   <script src="js/cart.js"></script>
 
   <!-- Luego el sistema de comentarios y carrusel -->
-  <script src="js/coment.js"></script>
+  <script src="JS/coment.js"></script>
+
+  <div id="side-pub-banner" class="side-pub-container">
+    <span id="side-pub-close" class="side-pub-close">
+      <i class="fa-solid fa-xmark"></i>
+    </span>
+    <div id="side-pub-dynamic-content">
+    </div>
+  </div>
 
 </body>
 
