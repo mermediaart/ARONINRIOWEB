@@ -1,373 +1,357 @@
-// ----------------------
-// COMENTARIOS YA ALMACENADOS
-// ----------------------
-const defaultReviews = [
-  {
-    name: "Luis Casillas",
-    email: "",
-    rating: 5,
-    location: "Rosario, Argentina",
-    comment:
-      "Una experiencia increíble. Todo organizado con detalle, sin preocupaciones.",
-    files: [
-      "Img/Clientesfelices.mp4",
-      "Img/clientes/clientes-1.jpg",
-      "Img/clientes/clientes-2.jpeg",
-    ],
-  },
-  {
-    name: "María González",
-    email: "",
-    rating: 5,
-    location: "Córdoba, Argentina",
-    comment:
-      "Gracias a Aaron Travel vivimos las mejores vacaciones. ¡Volveríamos sin dudarlo!",
-    files: [
-      "Img/Clientesfelices2.mp4",
-      "Img/clientes/clientes-3.jpeg",
-      "Img/clientes/clientes-4.jpeg",
-    ],
-  },
-  {
-    name: "Mariana Pérez",
-    email: "",
-    rating: 5,
-    location: "Entre Ríos, Argentina",
-    comment:
-      "Hermosa atención, nos ayudaron a resolver problemas con traslados. 100% recomendado.",
-    files: [
-      "Img/Clientesfelices4.mp4",
-      "Img/clientes/clientes-5.jpeg",
-      "Img/clientes/clientes-6.jpeg",
-    ],
-  },
-  {
-    name: "Eliana Trujillo",
-    email: "",
-    rating: 5,
-    location: "Buenos Aires, Argentina",
-    comment:
-      "Gracias a Aaron Travel, súper felices y conformes con el viaje, salió todo como esperábamos.",
-    files: [
-      "Img/Clientesfelices3.mp4",
-      "Img/clientes/clientes-7.jpeg",
-      "Img/clientes/clientes-8.jpeg",
-    ],
-  },
+// Sistema de Opiniones: Lógica tradicional (sin módulos)
+// Nota: Este archivo asume que las librerías de Firebase se cargan en el HTML como scripts globales.
+
+// --- 1. CONFIGURACIÓN DE FIREBASE (PRODUCCIÓN) ---
+const productionConfig = {
+    apiKey: "TU_API_KEY_AQUI",
+    authDomain: "TU_PROYECTO.firebaseapp.com",
+    projectId: "TU_PROYECTO_ID",
+    storageBucket: "TU_PROYECTO.appspot.com",
+    messagingSenderId: "TU_ID",
+    appId: "TU_APP_ID"
+};
+
+// --- VERIFICACIÓN DE ENTORNO ---
+let firebaseConfig = {};
+try {
+    firebaseConfig = typeof __firebase_config !== 'undefined' 
+        ? JSON.parse(__firebase_config) 
+        : productionConfig;
+} catch (e) {
+    firebaseConfig = productionConfig;
+}
+
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'mi-app-personalizada';
+
+// Variables de estado
+let db = null;
+let userId = 'anonimo';
+let filesToUpload = []; 
+let currentOpinionIndex = 0;
+let opinionsData = [];
+let autoPlayInterval = null;
+let userSubmittedOpinions = [];
+let currentLightboxMedia = [];
+let currentLightboxIndex = 0;
+
+// Opiniones estáticas
+const baseOpinions = [
+    { 
+        id: 1, 
+        name: "Carlos Martínez", 
+        date: "15 DE NOVIEMBRE, 2023", 
+        rating: 5, 
+        comment: "Excelente trabajo de Arominfo. La atención al detalle es impresionante.", 
+        hasGallery: true, 
+        media: [
+            { type: "image", url: "img/Test1.jpeg" }, 
+            { type: "image", url: "img/Test2.jpeg" },
+            { type: "video", url: "img/Clientesfelices3.mp4"}
+        ] 
+    },
+    { 
+        id: 2, 
+        name: "Juan Pérez", 
+        date: "10 DE DICIEMBRE, 2023", 
+        rating: 5, 
+        comment: "¡Una experiencia increíble!", 
+        hasGallery: false 
+    }
 ];
-// 💣 Reinicia el localStorage con los nuevos defaultReviews
-localStorage.setItem("reviews", JSON.stringify(defaultReviews));
-let reviews = defaultReviews;
 
-/*------------------------------------------------- 
-ENVIAR RESEÑA Y ADMINISTRARLA
--------------------------------------------------*/
-document.addEventListener("DOMContentLoaded", () => {
-  // ----------------------
-  // ENVÍO DE RESEÑA
-  // ----------------------
-  const form = document.getElementById("review-form");
-  const reviewList = document.getElementById("review-list");
-  const adminBtn = document.getElementById("admin-btn");
-  let isAdmin = false;
-  const adminPass = "1234"; // Cambiar por contraseña segura
-
-  // Función para renderizar reseñas en lista de admin
-  function renderReviews() {
-    if (!reviewList) return;
-
-    reviewList.innerHTML = "";
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-    reviews.forEach((rev, index) => {
-      const div = document.createElement("div");
-      div.classList.add("review-card");
-      div.innerHTML = `
-        <strong>${rev.name}</strong> - ${rev.rating} ⭐<br>
-        ${rev.comment}<br>
-        ${
-          rev.files
-            ? rev.files
-                .map(
-                  (f) =>
-                    `<img src="${f}" alt="Archivo" style="max-width:100px;margin:5px;">`
-                )
-                .join(" ")
-            : ""
+// --- INICIALIZACIÓN DE FIREBASE ---
+if (window.firebase && firebaseConfig.apiKey && firebaseConfig.apiKey !== "TU_API_KEY_AQUI") {
+    try {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
         }
-        ${
-          isAdmin
-            ? `<br><button class="delete-btn" data-index="${index}">Eliminar</button>`
-            : ""
-        }
-      `;
-      reviewList.appendChild(div);
-    });
-
-    if (isAdmin) {
-      document.querySelectorAll(".delete-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const index = parseInt(btn.dataset.index);
-          deleteReview(index);
-        });
-      });
+        db = firebase.firestore();
+        const auth = firebase.auth();
+        auth.signInAnonymously().catch(err => console.error("Error de Autenticación:", err));
+        auth.onAuthStateChanged(u => { if(u) userId = u.uid; });
+    } catch (e) {
+        console.error("Error al conectar con Firebase:", e);
     }
-  }
+}
 
-  function deleteReview(index) {
-    if (!confirm("¿Estás seguro que quieres eliminar este comentario?")) return;
-    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviews.splice(index, 1);
-    localStorage.setItem("reviews", JSON.stringify(reviews));
-    renderReviews();
-  }
+// --- FUNCIONES DE ALMACENAMIENTO LOCAL ---
+function saveLocal() { 
+    localStorage.setItem('userOpinions_v2', JSON.stringify(userSubmittedOpinions)); 
+}
 
-  // ----------------------
-  // ENVÍO DE FORMULARIO
-  // ----------------------
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+function loadLocal() { 
+    const s = localStorage.getItem('userOpinions_v2'); 
+    if(s) userSubmittedOpinions = JSON.parse(s); 
+}
 
-      const name = form.name.value;
-      const email = form.email.value;
-      const location = form.locacion.value;
-      const rating = form.rating.value;
-      const comment = form.comment.value;
+// --- UTILIDADES DE INTERFAZ ---
+function showMessage(msg, type = 'success') {
+    const el = document.createElement('div');
+    el.className = `fixed top-4 right-4 z-[3000] p-4 rounded-lg shadow-2xl text-white font-bold transition-all duration-500 transform ${type === 'error' ? 'bg-red-500' : 'bg-primary-green'}`;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => { 
+        el.style.opacity = '0'; 
+        el.style.transform = 'translateY(-20px)';
+        setTimeout(() => el.remove(), 500); 
+    }, 3000);
+}
 
-      const filesInput = form.files.files;
-      const filesArray = [];
+// --- LÓGICA DEL LIGHTBOX ---
+function openLightbox(media, start) {
+    if (!media || media.length === 0) return;
+    currentLightboxMedia = media;
+    currentLightboxIndex = start;
+    const lb = document.getElementById('lightbox');
+    if (lb) {
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        updateLightbox();
+    }
+}
 
-      for (let i = 0; i < filesInput.length; i++) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          filesArray.push(event.target.result);
-          if (filesArray.length === filesInput.length) saveReview();
-        };
-        reader.readAsDataURL(filesInput[i]);
-      }
+function closeLightbox() { 
+    const lb = document.getElementById('lightbox');
+    if (lb) {
+        lb.classList.remove('active'); 
+        document.body.style.overflow = ''; 
+    }
+}
 
-      if (filesInput.length === 0) saveReview();
+function updateLightbox() {
+    const item = currentLightboxMedia[currentLightboxIndex];
+    const container = document.getElementById('lightboxMediaContainer');
+    const counter = document.getElementById('lightboxCounter');
+    
+    if (counter) counter.textContent = `${currentLightboxIndex + 1} / ${currentLightboxMedia.length}`;
+    if (container && item) {
+        container.innerHTML = item.type === 'image' 
+            ? `<img src="${item.url}" class="lightbox-media" style="max-width:100%; max-height:85vh; object-fit:contain;">` 
+            : `<video src="${item.url}" controls autoplay muted class="lightbox-media" style="max-width:100%; max-height:85vh;"></video>`;
+    }
+}
 
-      function saveReview() {
-        const review = {
-          name,
-          email,
-          rating,
-          comment,
-          location,
-          files: filesArray,
-        };
-        reviews.push(review);
-        localStorage.setItem("reviews", JSON.stringify(reviews));
-        form.reset();
+function navLightbox(dir) {
+    if (currentLightboxMedia.length <= 1) return;
+    currentLightboxIndex = (currentLightboxIndex + dir + currentLightboxMedia.length) % currentLightboxMedia.length;
+    updateLightbox();
+}
 
-        // 🧹 Limpia el listado visual de archivos
-        const fileListContainer = document.getElementById("file-list");
-        if (fileListContainer) fileListContainer.innerHTML = "";
-
-        // Limpia el input de archivos manualmente (en algunos navegadores persiste)
-        const fileInput = document.getElementById("files");
-        if (fileInput) fileInput.value = "";
-
-        // Mensaje visual de éxito
-        alert("¡Gracias por tu comentario! Te esperamos para tu próximo viaje");
-
-        // Re-renderiza el contenido actualizado
-        renderReviews();
-        addReviewToCarousel(review);
-        initCarousel();
-      }
-    });
-  }
-
-  // ----------------------
-  // AÑADIR REVIEW AL CARRUSEL
-  // ----------------------
-  function addReviewToCarousel(review) {
-    const carousel = document.querySelector(".opiniones-carousel");
-    if (!carousel) return;
-
-    const slide = document.createElement("div");
-    slide.classList.add("opinion-slide");
-
-    let mediaContent = "";
-    if (review.files && review.files.length > 0) {
-      mediaContent += `<div class="media-gallery">`;
-
-      review.files.forEach((file, i) => {
-        const isVideo = file.startsWith("data:video") || file.endsWith(".mp4");
-        const displayStyle = i === 0 ? "flex" : "none"; // solo muestra la primera
-
-        if (isVideo) {
-          mediaContent += `
-          <div class="media-item" style="display:${displayStyle}">
-            <video muted playsinline>
-              <source src="${file}" type="video/mp4">
-            </video>
-          </div>`;
+// --- LÓGICA DEL CARRUSEL ---
+function adjustArrowPosition() {
+    const container = document.querySelector('#currentOpinionContainer > div');
+    const prevBtn = document.getElementById('prevOpinionBtn');
+    const nextBtn = document.getElementById('nextOpinionBtn');
+    
+    if (container && prevBtn && nextBtn) {
+        const height = container.offsetHeight;
+        if (height < 150) {
+            prevBtn.classList.add('scale-75');
+            nextBtn.classList.add('scale-75');
         } else {
-          mediaContent += `
-          <div class="media-item" style="display:${displayStyle}">
-            <img src="${file}" alt="Archivo ${i + 1}">
-          </div>`;
+            prevBtn.classList.remove('scale-75');
+            nextBtn.classList.remove('scale-75');
         }
-      });
-
-      mediaContent += `
-      ${
-        review.files.length > 1
-          ? `<div class="gallery-indicator">+${review.files.length - 1}</div>`
-          : ""
-      }
-    </div>`;
     }
-
-    slide.innerHTML = `
-    <div class="opinion-content">
-      <div class="opinion-left">
-        <h3>${review.name}</h3>
-        <p class="stars">${"⭐".repeat(review.rating)}</p>
-        <p class="location">${review.location}</p>
-        <p class="comment">“${review.comment}”</p>
-      </div>
-      <div class="opinion-right">
-        ${mediaContent || ""}
-      </div>
-    </div>
-  `;
-
-    const opinionContentDiv = slide.querySelector(".opinion-content");
-    if (!review.files || review.files.length === 0) {
-      opinionContentDiv.classList.add("no-media");
-    }
-
-    const prevBtn = document.querySelector(".prev-btn");
-    carousel.insertBefore(slide, prevBtn);
-  }
-
-  // ----------------------
-  // RENDERIZAR CARRUSEL DESDE LOCALSTORAGE
-  // ----------------------
-  function renderCarouselFromLocalStorage() {
-    const carousel = document.querySelector(".opiniones-carousel");
-    if (!carousel) return;
-
-    carousel.querySelectorAll(".opinion-slide").forEach((s) => s.remove());
-
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviews.forEach((rev) => addReviewToCarousel(rev));
-  }
-
-  // ----------------------
-  // FUNCIONES DEL CARRUSEL
-  // ----------------------
-  function initCarousel() {
-    const slides = document.querySelectorAll(".opinion-slide");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-    let index = 0;
-
-    function showSlide(i) {
-      slides.forEach((slide) => {
-        slide.classList.remove("active");
-        const video = slide.querySelector("video");
-        if (video) video.pause();
-      });
-
-      slides[i].classList.add("active");
-      const activeVideo = slides[i].querySelector("video");
-      if (activeVideo) activeVideo.play();
-    }
-
-    prevBtn.addEventListener("click", () => {
-      index = index === 0 ? slides.length - 1 : index - 1;
-      showSlide(index);
-    });
-
-    nextBtn.addEventListener("click", () => {
-      index = index === slides.length - 1 ? 0 : index + 1;
-      showSlide(index);
-    });
-
-    if (slides.length > 0) showSlide(index);
-  }
-
-  // Renderizar carrusel con todo lo que haya en localStorage
-  renderCarouselFromLocalStorage();
-  initCarousel();
-});
-
-// --- LIGHTBOX ---
-const lightbox = document.getElementById("lightbox");
-const lightboxContent = document.querySelector(".lightbox-content");
-const closeLightbox = document.querySelector(".lightbox .close");
-const prevBtn = document.querySelector(".lightbox-prev");
-const nextBtn = document.querySelector(".lightbox-next");
-
-let mediaItems = []; // galería actual
-let currentIndex = 0;
-
-document.addEventListener("click", (e) => {
-  // Abrir lightbox
-  if (e.target.matches(".opinion-right img, .opinion-right video")) {
-    const gallery = [
-      ...e.target.closest(".opinion-right").querySelectorAll("img, video"),
-    ];
-    mediaItems = gallery;
-    currentIndex = gallery.indexOf(e.target);
-    showMedia(currentIndex);
-    lightbox.classList.add("active");
-    document.body.style.overflow = "hidden"; // evita scroll de fondo
-  }
-});
-
-function showMedia(index) {
-  const item = mediaItems[index];
-  if (!item) return;
-
-  const clone = item.cloneNode(true);
-  clone.removeAttribute("style");
-  if (clone.tagName === "VIDEO") {
-    clone.controls = true;
-    clone.muted = false;
-    clone.play();
-  }
-  lightboxContent.innerHTML = "";
-  lightboxContent.appendChild(clone);
 }
 
-function closeLb() {
-  lightbox.classList.remove("active");
-  lightboxContent.innerHTML = "";
-  mediaItems = [];
-  currentIndex = 0;
-  document.body.style.overflow = ""; // vuelve el scroll
+function loadOpinion(idx) {
+    opinionsData = [...baseOpinions, ...userSubmittedOpinions];
+    if (opinionsData.length === 0) return;
+    
+    const op = opinionsData[idx];
+    const container = document.getElementById('currentOpinionContainer');
+    if (!container || !op) return;
+
+    let stars = '';
+    for(let i=1; i<=5; i++) {
+        stars += `<i class="${i <= op.rating ? 'fas' : 'far'} fa-star text-accent-yellow text-xs md:text-base"></i>`;
+    }
+    
+    let gallery = '';
+    if (op.hasGallery && op.media && op.media.length > 0) {
+       gallery = `<div class="mt-4 grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-3">${op.media.map((m, i) => {
+            const mediaTag = m.type === 'video' 
+                ? `<video src="${m.url}" class="w-full h-full object-cover"></video>
+                   <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+                       <i class="fas fa-play text-white text-lg md:text-2xl"></i>
+                   </div>`
+                : `<img src="${m.url}" class="w-full h-full object-cover">`;
+
+            return `
+            <div class="thumbnail aspect-square rounded-lg overflow-hidden bg-gray-200 relative cursor-pointer" data-idx="${i}">
+                ${mediaTag}
+                <div class="thumbnail-overlay md:flex hidden"><i class="fas fa-search-plus text-white text-xl"></i></div>
+            </div>`;
+        }).join('')}</div>`;
+    }
+
+    container.innerHTML = `
+        <div class="bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-12 border border-gray-100 border-l-[8px] md:border-l-[10px] border-l-primary-green shadow-lg transition-all duration-500 hover:shadow-xl">
+            <div class="flex justify-between items-start mb-3">
+                <div class="overflow-hidden">
+                    <h3 class="font-bold text-gray-800 text-sm md:text-lg truncate">${op.name}</h3>
+                    <p class="text-[10px] text-gray-500 uppercase">${op.date}</p>
+                </div>
+                <div class="flex gap-0.5 md:gap-1 flex-shrink-0">${stars}</div>
+            </div>
+            <div class="comment-text bg-gray-50 md:bg-white p-3 md:p-4 rounded-lg border border-gray-100 md:border-gray-200 text-gray-700 text-xs md:text-base italic shadow-inner" style="word-wrap:break-word; white-space:pre-wrap;">"${op.comment}"</div>
+            ${gallery}
+        </div>`;
+
+    container.querySelectorAll('.thumbnail').forEach(t => {
+        t.onclick = () => openLightbox(op.media, parseInt(t.dataset.idx));
+        if (window.innerWidth >= 768) {
+            t.onmouseenter = () => { if(t.querySelector('.thumbnail-overlay')) t.querySelector('.thumbnail-overlay').style.opacity = '1'; };
+            t.onmouseleave = () => { if(t.querySelector('.thumbnail-overlay')) t.querySelector('.thumbnail-overlay').style.opacity = '0'; };
+        }
+    });
+
+    adjustArrowPosition();
 }
 
-closeLightbox.addEventListener("click", closeLb);
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) closeLb();
-});
+function navigateOpinion(dir) {
+    const container = document.getElementById('currentOpinionContainer');
+    if (!container || opinionsData.length <= 1) return;
 
-// Navegación
-prevBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
-  showMedia(currentIndex);
-});
+    container.style.opacity = '0';
+    setTimeout(() => {
+        currentOpinionIndex = (currentOpinionIndex + dir + opinionsData.length) % opinionsData.length;
+        loadOpinion(currentOpinionIndex);
+        container.style.opacity = '1';
+    }, 300);
+}
 
-nextBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex + 1) % mediaItems.length;
-  showMedia(currentIndex);
-});
+// --- NUEVA LÓGICA DE DESPLAZAMIENTO TÁCTIL (SWIPE) PARA OPINIONES ---
+function initOpinionTouch() {
+    const container = document.getElementById('currentOpinionContainer');
+    if (!container) return;
 
-// Teclado
-document.addEventListener("keydown", (e) => {
-  if (!lightbox.classList.contains("active")) return;
-  if (e.key === "ArrowRight") nextBtn.click();
-  if (e.key === "ArrowLeft") prevBtn.click();
-  if (e.key === "Escape") closeLb();
+    let startX = 0;
+    let endX = 0;
+
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        clearInterval(autoPlayInterval); // Pausa el carrusel al tocar
+    }, {passive: true});
+
+    container.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+
+        // Si el deslizamiento es mayor a 50px
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                navigateOpinion(1); // Deslizar a la izquierda -> Siguiente
+            } else {
+                navigateOpinion(-1); // Deslizar a la derecha -> Anterior
+            }
+        }
+        // Reiniciar el auto-play después de 1 minuto
+        autoPlayInterval = setInterval(() => navigateOpinion(1), 60000);
+    }, {passive: true});
+}
+
+// --- MANEJO DE ARCHIVOS ---
+const fileInput = document.getElementById('fileInput');
+if (fileInput) {
+    fileInput.onchange = e => {
+        const newFiles = Array.from(e.target.files);
+        if (filesToUpload.length + newFiles.length > 3) {
+            showMessage("Límite alcanzado: Máximo 3 archivos.", "error");
+            e.target.value = '';
+            return;
+        }
+        newFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = ev => {
+                const isVideo = file.type.startsWith('video');
+                filesToUpload.push({ type: isVideo ? 'video' : 'image', url: ev.target.result });
+                const prev = document.createElement('div');
+                prev.className = 'aspect-square rounded bg-gray-100 overflow-hidden border relative group';
+                prev.innerHTML = `
+                    ${isVideo ? `<video src="${ev.target.result}" class="w-full h-full object-cover" muted></video>` : `<img src="${ev.target.result}" class="w-full h-full object-cover">`}
+                    <button type="button" class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 text-[10px] flex items-center justify-center" onclick="this.parentElement.remove();">X</button>
+                `;
+                document.getElementById('filePreviewContainer').appendChild(prev);
+            };
+            reader.readAsDataURL(file);
+        });
+        e.target.value = ''; 
+    };
+}
+
+// --- ENVÍO DEL FORMULARIO ---
+const opinionForm = document.getElementById('opinionForm');
+if (opinionForm) {
+    opinionForm.onsubmit = async e => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const nombre = document.getElementById('nombre').value;
+        const comment = document.getElementById('comentario').value;
+        const rating = parseInt(document.getElementById('rating').value);
+
+        btn.disabled = true; 
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Publicando...';
+
+        const newOp = {
+            id: Date.now(),
+            name: nombre,
+            date: new Date().toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' }).toUpperCase(),
+            rating: rating,
+            comment: comment,
+            hasGallery: filesToUpload.length > 0,
+            media: [...filesToUpload]
+        };
+
+        if (db) {
+            try {
+                const path = `artifacts/${appId}/public/data/reviews`;
+                await db.collection(path).add({ ...newOp, timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+            } catch (err) { console.error("Error al guardar:", err); }
+        }
+
+        userSubmittedOpinions.unshift(newOp);
+        saveLocal();
+        loadOpinion(0);
+        opinionForm.classList.add('hidden');
+        document.getElementById('successMessage').classList.remove('hidden');
+        showMessage("¡Comentario publicado!");
+    };
+}
+
+// --- INICIALIZACIÓN ---
+document.addEventListener('DOMContentLoaded', () => {
+    loadLocal();
+    loadOpinion(0);
+    initOpinionTouch(); // Activar soporte táctil
+    
+    const bind = (id, action) => {
+        const el = document.getElementById(id);
+        if (el) el.onclick = action;
+    };
+
+    bind('prevOpinionBtn', () => navigateOpinion(-1));
+    bind('nextOpinionBtn', () => navigateOpinion(1));
+    bind('lightboxClose', closeLightbox);
+    bind('lightboxPrev', e => { e.stopPropagation(); navLightbox(-1); });
+    bind('lightboxNext', e => { e.stopPropagation(); navLightbox(1); });
+    bind('newOpinionBtn', () => location.reload());
+
+    document.querySelectorAll('#starRatingSystem label').forEach((s, i) => {
+        s.onclick = () => {
+            const val = 5 - i;
+            document.getElementById('rating').value = val;
+            const labels = ["Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"];
+            document.getElementById('ratingText').textContent = `${labels[val-1]} (${val} estrellas)`;
+        };
+    });
+
+    const commentArea = document.getElementById('comentario');
+    if (commentArea) {
+        commentArea.oninput = () => document.getElementById('charCount').textContent = commentArea.value.length;
+    }
+
+    autoPlayInterval = setInterval(() => navigateOpinion(1), 60000);
+    window.addEventListener('resize', adjustArrowPosition);
 });
