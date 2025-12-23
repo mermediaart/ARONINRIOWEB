@@ -44,9 +44,9 @@ const baseOpinions = [
         comment: "Excelente trabajo de Arominfo. La atención al detalle es impresionante.", 
         hasGallery: true, 
         media: [
-            { type: "image", url: "img/Test1.jpeg" }, 
-            { type: "image", url: "img/Test2.jpeg" },
-            { type: "video", url: "img/Clientesfelices3.mp4"}
+            { type: "image", url: "./img/Test1.jpeg" }, 
+            { type: "image", url: "./img/Test2.jpeg" },
+            { type: "video", url: "./img/Clientesfelices3.mp4"}
         ] 
     },
     { 
