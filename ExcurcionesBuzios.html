@@ -14,6 +14,9 @@
     href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
     rel="stylesheet">
 
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
 </head>
 
@@ -38,14 +41,13 @@
       <span></span>
     </div>
 
-    <!-- Enlaces de navegación -->
-    <div class="navbar-nav" id="menu">
-      <a href="index.html">Inicio</a>
-      <a href="index.html#ofertas">Ofertas</a>
-      <a href="index.html#nosotros">Nosotros</a>
-      <a href="index.html#opiniones">Opiniones</a>
-      <a href="index.html#contacto">Contacto</a>
-    </div>
+      <!-- Enlaces de navegación -->
+        <div class="navbar-nav" id="menu">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="index.html#opiniones">Opiniones</a>
+            <a href="index.html#contacto">Contacto</a>
+        </div>
 
     <!-- Ícono flotante del carrito -->
     <div id="cart-icon">
@@ -71,15 +73,63 @@
 
       <div class="cart-footer">
         <div class="cart-subtotal">
-          <span>Subtotal:</span>
-          <strong>R$<span id="cart-total">0</span></strong>
-        </div>
+    <span>Subtotal:</span>
+    <strong><span id="cart-total">0</span></strong>
+</div>
         <button id="cart-send">Finalizar compra</button>
         <button id="cart-clear">Vaciar carrito</button>
       </div>
     </div>
 
+
+    
+<div class="quick-side-menu" id="sideMenu">
+  <button class="side-menu-toggle" id="sideMenuToggle">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-hotel"></i>
+      <span>Alojamientos</span>
+    </div>
+    <div class="group-links">
+      <a href="AlojamientosCopacabana.html">• Copacabana</a>
+      <a href="AlojamientosBuzios.html">• Buzios</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-car"></i>
+      <span>Traslados</span>
+    </div>
+    <div class="group-links">
+      <a href="trasladosexternos.html">• Externos</a>
+      <a href="trasladosInternos.html">• Internos</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-umbrella-beach"></i>
+      <span>Excursiones</span>
+    </div>
+    <div class="group-links">
+      <a href="ExcurcionesRio.html">• Río de Janeiro</a>
+      <a href="ExcurcionesBuzios.html">• Buzios</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <a href="paquetes.html" class="group-header single-link">
+      <i class="fas fa-suitcase-rolling"></i>
+      <span>Paquetes</span>
+    </a>
+  </div>
+</div>
   </nav>
+
 
   <header>
     <h1 class="titulos-grande titulos-light">Excursiones en Buzios</h1>
@@ -95,7 +145,7 @@
   </div>
 
   <div class="container" id="excursiones">
-    <div class="card" data-name="Arraial Do cabo" data-price="50" data-category="excursiones" data-tipo="Playa"
+    <div class="card" data-name="Arraial Do cabo" data-price="0" data-category="excursiones" data-tipo="Playa"
       data-options='{}'
       data-images='["img/excursiones/buzios/arraial/Arraial-Do-Cabo1.jpg", "img/excursiones/buzios/arraial/arraial-do-cabo2.jpg", "img/excursiones/buzios/arraial/arraial-do-cabo3.jpg"]'
       data-description="Una excursión inolvidable a las playas paradisíacas de Arraial do Cabo.">
@@ -105,11 +155,10 @@
         <p>Tipo: Playa</p>
         <p>Búsqueda de Alojamiento: Buzios</p>
         <p>Duración: 4 horas</p>
-        <p>Desde R$50</p>
       </div>
     </div>
 
-    <div class="card" data-name="Cabo Frio" data-price="50" data-category="excursiones" 7 data-tipo="Ciudad"
+    <div class="card" data-name="Cabo Frio" data-price="0" data-category="excursiones" 7 data-tipo="Ciudad"
       data-options='{}'
       data-images='["img/excursiones/buzios/cabo frio/cabofrio-1.jpg", "img/excursiones/buzios/cabo frio/cabofrio-2.jpg", "img/excursiones/buzios/cabo frio/cabofrio-3.jpg"]'
       data-description="Un recorrido por los puntos históricos y de compras de Cabo Frio.">
@@ -119,7 +168,6 @@
         <p>Tipo: Ciudad</p>
         <p>Búsqueda de Alojamiento: Buzios</p>
         <p>Duración: 3 horas</p>
-        <p>Desde R$50</p>
       </div>
     </div>
 
@@ -133,7 +181,6 @@
         <p>Tipo: Ciudad</p>
         <p>Búsqueda de Alojamiento: Buzios</p>
         <p>Duración: 3 horas</p>
-        <p>Desde R$50</p>
       </div>
     </div>
   </div>
@@ -156,7 +203,7 @@
         <input type="number" id="modal-quantity" value="1" min="1" style="width: 80px; padding: 5px;">
       </div>
 
-      <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
+      <p class="modal-price">Precio: Cotizacion vía WhatsApp</p>
       <button id="add-to-cart-modal">Agregar al carrito</button>
     </div>
   </div>
@@ -184,7 +231,10 @@
         <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
       </div>
 
-      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por </p>
+      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por 
+        <a href="https://joak1267.github.io/Portafolio-Joa-Tech/" target="_blank" class="dev-link">Joa Tech</a> &
+        <a href="https://mermediaart.github.io/web/" target="_blank" class="dev-link">MerMedia Art</a>
+      </p>
     </div>
 
     <!-- Botón flotante WhatsApp -->

@@ -15,8 +15,12 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
 
 
   <script>
@@ -89,9 +93,8 @@
 
       <div class="cart-footer">
         <div class="cart-subtotal">
-          <span>Subtotal:</span>
-          <strong>R$<span id="cart-total">0</span></strong>
-        </div>
+    <span>Subtotal:</span>
+    <strong><span id="cart-total">D$ 0.00</span></strong> </div>
         <button id="cart-send">Finalizar compra</button>
         <button id="cart-clear">Vaciar carrito</button>
       </div>
@@ -237,7 +240,7 @@
               class="card-item bg-white p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg text-center hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-b-2  border-primary-blue"
               onclick="openModal('modal-pagos-seguros')">
               <i class="fa-solid fa-credit-card text-2xl sm:text-3xl md:text-4xl text-primary-blue mb-1 sm:mb-2"></i>
-              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Pagos Seguros</h3>
+              <h3 class="font-bold text-xs sm:text-base md:text-base mb-0.5 sm:mb-1 text-gray-800">Metodos de Pago</h3>
               <p class="text-[10px] xs:text-xs text-gray-500">Cuotas protegidas.</p>
             </div>
             <div
@@ -299,18 +302,102 @@
           </ul>
         </div>
 
-        <div id="modal-pagos-seguros" class="modal-content hidden modal-content-new">
-          <i class="fa-solid fa-file-circle-check text-5xl text-primary-blue mb-5"></i>
-          <h3 class="text-xl sm:text-2xl font-bold mb-6 text-gray-800 text-center">Plataforma de Pagos Segura</h3>
-          <ul class="text-left text-gray-700 max-w-sm mx-auto w-full">
-            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
-                class="text-base font-medium">Transacciones protegidas con encriptación SSL.</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
-                class="text-base font-medium">Opción de pagar en cuotas sin intereses.</span></li>
-            <li class="flex items-center"><i class="fas fa-check-circle text-primary-blue mr-3 mt-1"></i><span
-                class="text-base font-medium">Aceptamos las principales tarjetas de crédito.</span></li>
-          </ul>
-        </div>
+      <div id="modal-pagos-seguros" class="modal-content hidden modal-content-new w-full max-w-2xl px-6 py-8">
+  
+  <div class="text-center mb-8">
+    <i class="fa-solid fa-credit-card text-2xl sm:text-3xl md:text-4xl text-primary-blue mb-1 sm:mb-2"></i>
+    <h3 class="text-2xl font-bold text-gray-800 text-center">Métodos de Pago Aceptados</h3>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full text-left">
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-building-columns text-blue-600 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug break-words">Transferir (Pesos Arg)</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-handshake text-blue-400 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Mercado Pago</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-credit-card text-purple-600 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Tarjeta de Débito / Crédito</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-link text-indigo-500 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Link de Pago</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-wallet text-pink-500 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Prex / Belo / Cocos</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-brands fa-pix text-teal-600 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">PIX (Brasil)</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-money-bill-wave text-green-600 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Dólares Físicos</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-money-bill-1-wave text-green-500 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Reales Físicos</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-coins text-yellow-600 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Pesos Chilenos</span>
+      </div>
+    </div>
+
+    <div class="flex items-center p-5 bg-gray-50 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+      <i class="fa-solid fa-coins text-blue-800 text-2xl w-8 text-center mr-7 flex-shrink-0"></i>
+      <div class="flex-1">
+        <span class="block font-medium text-gray-700 text-sm leading-snug">Pesos Uruguayos</span>
+      </div>
+    </div>
+
+  </div>
+
+ <div class="mt-8">
+    <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-center gap-3 text-center shadow-sm">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8 text-blue-600 flex-shrink-0">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+      </svg>
+      
+      <span class="text-blue-800 font-semibold text-lg leading-tight">
+        Consultá con tu asesor por la cotización del día.
+      </span>
+
+    </div>
+  </div>
+
+</div>
 
         <div id="modal-atencion" class="modal-content hidden modal-content-new">
           <i class="fa-solid fa-headset text-5xl text-accent-yellow mb-5"></i>
@@ -464,11 +551,11 @@
         data-images='["img/ofertaX.jpg", "img/Buzios.jpg", "img/Cabo Frio-1920x1080.jpg"]'
         data-description="Paquete de alojamiento y traslados con descuento. Disfruta de una estadía en Buzios sin preocupaciones.">
 
-        <img class="open-modal-trigger" src="img/ofertaX.jpg" alt="Oferta 1">
+        <img class="open-modal-trigger" src="img/paquete_buzios.png" alt="Oferta 1">
         <div class="card-content">
-          <h3>Paquete Buzios: Alojamiento + Traslado</h3>
-          <p>Incluye 4 noches en Buzios + traslados de aeropuerto.</p>
-          <p class="offer-price">Precio: R$1200</p>
+          <h3>Paquete Buzios</h3>
+          <p>Incluye 7 noches en Buzios + traslados y vuelo.</p>
+          <p class="offer-price">Precio: $799</p>
         </div>
       </div>
 
@@ -482,7 +569,7 @@
         <div class="card-content">
           <h3>Traslado Privado + City Tour Gratuito</h3>
           <p>Contrata un traslado privado y obtén un tour a pie por Copacabana.</p>
-          <p class="offer-price">Precio: R$350</p>
+          <p class="offer-price">Precio: R$850</p>
         </div>
       </div>
     </div>
@@ -510,42 +597,62 @@
       <!-- Opciones dinámicas de la oferta -->
       <div class="modal-options-container"></div>
 
-      <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
+      <div class="modal-price-info">
+        <p class="modal-price">Precio Total: $ <span id="modal-price-value">0</span></p>
+      </div>
+
       <button id="add-to-cart-modal">Agregar al carrito</button>
     </div>
   </div>
 
   <!-- SOBRE NOSOTROS -->
-
   <section id="nosotros" class="py-16 bg-gradient-to-b from-white via-green-50 to-amber-50">
-    <h2 class="section-title titulos-deco text-gray-800">Sobre Nosotros</h2>
-    <div class="about-container">
-      <div class="about-image">
-        <img src="img/Nosotros.jpg" alt="Equipo de Aaron In Rio">
+    <h2 class="section-title titulos-deco text-gray-800 text-center mb-10">Sobre Nosotros</h2>
+
+    <div class="about-container max-w-7xl mx-auto px-4 flex flex-col md:flex-row gap-10 items-start">
+
+      <div class="about-image w-full md:w-1/3">
+        <img src="img/Nosotros.jpg" alt="Equipo de Aaron In Rio" class="rounded-2xl shadow-xl w-full">
       </div>
 
-      <div class="about-text text-gray-700">
+      <div class="about-text text-gray-700 w-full md:w-2/3">
+
         <p class="mb-4">
-          <strong class="text-green-600">Aaron In Rio</strong> nació de una pasión compartida: viajar, conectar con
-          personas y
-          descubrir el alma de Brasil.
+          Hace unos años, llegué a Río de Janeiro buscando una aventura y terminé encontrando mi lugar en el mundo.
+          Después de vivir tres años en la Cidade Maravilhosa, descubrí que el verdadero Brasil no está solo en los
+          mapas, sino en los detalles que solo un local conoce.
         </p>
         <p class="mb-4">
-          Lo que empezó como un grupo de amigos apasionados por las playas y la cultura brasileña,
-          creció hasta convertirse en una agencia donde cada viaje se planifica con conocimiento local
-          y atención personalizada.
+          Así nació <strong >Aaron in Río</strong>: no como una agencia de turismo convencional,
+          sino como un puente para que vos también te enamores de este lugar sin las complicaciones de ser un turista
+          más.
         </p>
-        <p class="mb-4">
-          Hoy, acompañamos a cientos de viajeros a vivir Brasil desde adentro,
-          con la tranquilidad de contar con asesores que conocen cada destino,
-          hablan el idioma y están ahí para vos en cada paso.
+
+        <p class="about-cta  font-medium mb-6">
+          <em>No solo organizamos viajes, te acompañamos y facilitamos tu camino a Brasil. <br>
+            Nuestra misión es transformar un simple viaje en las vacaciones de tus sueños.</em>
         </p>
-        <p class="about-cta text-amber-700 font-medium">
-          <em>No solo organizamos viajes, te abrimos acompañamos y facilitamos tu camino a Brasil.</em>
+
+        <div class="bg-white p-8 rounded-2xl border-l-8 border-primary-green shadow-lg mb-8 transform hover:-translate-y-1 transition-all">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Tu única tarea es disfrutar</h3>
+
+          <p class="mb-6">
+            Sabemos que planear un viaje puede ser estresante. En Aaron en Río, nos encargamos de los
+            imprevistos y la organización para que vos solo tengas que preocuparte por crear recuerdos
+            inolvidables.
+            Te escuchamos para ofrecerte recomendaciones que se adapten realmente a lo que buscás y resolvemos cada
+            detalle para vos y tu familia.</span>
+
+        </div>
+
+        <p class=" text-2xl font-bold text-green-600 mt-5 titulos-deco"> ¿Estás listo para descubrir Brasil
+          con nosotros?
         </p>
       </div>
+
     </div>
   </section>
+
 
 
   <section class="asesores py-16 bg-gradient-to-b from-amber-50 via-yellow-50 to-green-50">
@@ -756,7 +863,10 @@
         <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
       </div>
 
-      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por </p>
+      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por 
+        <a href="https://joak1267.github.io/Portafolio-Joa-Tech/" target="_blank" class="dev-link">Joa Tech</a> &
+        <a href="https://mermediaart.github.io/web/" target="_blank" class="dev-link">MerMedia Art</a>
+      </p>
     </div>
 
     <!-- Botón flotante WhatsApp -->

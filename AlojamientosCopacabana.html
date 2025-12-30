@@ -5,59 +5,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alojamientos en Copacabana</title>
+
   <link rel="stylesheet" href="css/Alojamientos.css">
-  <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al archivo CSS externo -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <!--ICONOS-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/styles.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
     rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+
+    <style>
+      @media (min-width: 900px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
+    </style>
 
 </head>
 
-<!-- Ícono que aparece en la pestaña del navegador -->
 <link rel="icon" type="image/x-icon" href="img/Logo Aaron.png">
 
 <body class="copacabana-theme">
 
-
-  <!-- NAVBAR (barra de navegación principal) -->
   <nav class="navbar">
-    <!-- Logo de la empresa con link a index.html -->
     <div class="navbar-logo">
       <a href="index.html">
         <img src="img/Logo Aaron.png" alt="Logo">
       </a>
     </div>
 
-    <!-- Botón Hamburguesa (solo en móvil/tablet) -->
     <div class="menu-btn" id="menu-btn">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
-    <!-- Enlaces de navegación -->
-    <div class="navbar-nav" id="menu">
-      <a href="index.html">Inicio</a>
-      <a href="index.html#ofertas">Ofertas</a>
-      <a href="index.html#nosotros">Nosotros</a>
-      <a href="index.html#opiniones">Opiniones</a>
-      <a href="index.html#contacto">Contacto</a>
-    </div>
+     <div class="navbar-nav" id="menu">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#nosotros">Nosotros</a>
+            <a href="index.html#opiniones">Opiniones</a>
+            <a href="index.html#contacto">Contacto</a>
+        </div>
 
-    <!-- Ícono flotante del carrito -->
     <div id="cart-icon">
       <i class="fa-solid fa-cart-shopping"></i>
       <span id="cart-count">0</span>
     </div>
 
-    <!-- Overlay de fondo -->
     <div id="cart-overlay"></div>
 
-    <!-- Panel lateral del carrito -->
     <div id="cart-panel" class="cart-panel">
       <div class="cart-header">
         <div class="cart-header-left">
@@ -72,21 +72,68 @@
 
       <div class="cart-footer">
         <div class="cart-subtotal">
-          <span>Subtotal:</span>
-          <strong>R$<span id="cart-total">0</span></strong>
-        </div>
+    <span>Subtotal:</span>
+    <strong><span id="cart-total">0</span></strong>
+</div>
         <button id="cart-send">Finalizar compra</button>
         <button id="cart-clear">Vaciar carrito</button>
       </div>
     </div>
 
+    
+  
+<div class="quick-side-menu" id="sideMenu">
+  <button class="side-menu-toggle" id="sideMenuToggle">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-hotel"></i>
+      <span>Alojamientos</span>
+    </div>
+    <div class="group-links">
+      <a href="AlojamientosCopacabana.html">• Copacabana</a>
+      <a href="AlojamientosBuzios.html">• Buzios</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-car"></i>
+      <span>Traslados</span>
+    </div>
+    <div class="group-links">
+      <a href="trasladosexternos.html">• Externos</a>
+      <a href="trasladosInternos.html">• Internos</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-umbrella-beach"></i>
+      <span>Excursiones</span>
+    </div>
+    <div class="group-links">
+      <a href="ExcurcionesRio.html">• Río de Janeiro</a>
+      <a href="ExcurcionesBuzios.html">• Buzios</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <a href="paquetes.html" class="group-header single-link">
+      <i class="fas fa-suitcase-rolling"></i>
+      <span>Paquetes</span>
+    </a>
+  </div>
+</div>
 
 
   </nav>
 
-  <header>
+<header class="header-alojamiento-copacabana">
     <h1 class="titulos-grande titulos-light">Alojamientos en Copacabana</h1>
-  </header>
+</header>
 
   <div class="search-filter">
     <input type="text" id="search" placeholder="Buscar alojamiento...">
@@ -107,54 +154,268 @@
     </select>
   </div>
 
-  <div class="container" id="alojamientos">
-    <div class="card" data-name="Apartamento 1150" data-tipo="Apartamento" data-personas="2,3"
-      data-category="alojamientos"
-      data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4"]}]'
-      data-images='["img/alojamientos/copacabana/apartamento 1150/part1150-1.png", "img/alojamientos/copacabana/apartamento 1150/part1150-2.png", "img/alojamientos/copacabana/apartamento 1150/part1150-3.png"]'
-      data-description="Copabana frente de la playa.
+<div class="container" id="alojamientos">
 
-                    A 10 minutos de playa Ipanema/leblon.
+    <div class="card" data-price="0" data-name="Apartamento 1150" data-tipo="Apartamento" data-personas="2,3,4,5"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4"]}]'
+    data-images='["img/alojamientos/copacabana/apartamento 1150/apartamento1150.mp4"]'
+    data-description="📍 UBICACIÓN:
+Copacabana frente a la playa.
 
-                  Ropa de cama y toallas incluídas.
+🌟 CARACTERÍSTICAS:
+• 🌊 A 10 minutos de Ipanema y Leblon.
+• 🍽️ Zona de restaurantes y bares.
+• ✈️ A 40 minutos del aeropuerto (punto de recogida de tours).
 
-                  Casi todos tienen aire acondicionado.
-
-                  Tv,cocina equipada,wifi, ascensor.
-
-Portero las 24 hs (le pueden dejar las llaves) 
-
-a 40 minutos del aeropuerto/todos los tour te buscan aqui/zona de restaurantes y bares.
-
-Capacidad hasta 5 personas. 
-
-Tienen cama matrimonial y sofá cama.
-
-(Incluir taza de limpieza en el valor por noche).">
-      <img class="open-modal-trigger" src="img/alojamientos/copacabana/apartamento 1150/part1150-1.png"
-        alt="Apartamento Princesa Isabel">
-      <div class="card-content">
-        <h3>Apartamento 1150</h3>
-        <p>Capacidad: 1 - 3 personas</p>
-      </div>
+🏠 COMODIDADES:
+• Capacidad: Hasta 5 personas.
+• Distribución: Cama matrimonial y sofá cama.
+• Equipamiento: TV, Wifi, Cocina equipada.
+• Climatización: Aire acondicionado.
+• Incluye: Ropa de cama y toallas.
+• Edificio: Ascensor y Portero 24hs (recepción de llaves).">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apartamento 1150/1150_portada.png"
+      alt="Apartamento Princesa Isabel">
+    <div class="card-content">
+      <h3>Apartamento 1150</h3>
+      <p>Capacidad: 1 - 5 personas</p>
     </div>
-
-    <div class="card" data-name="Apartamento Verano Stay" data-tipo="Apartamento" data-personas="2,3,4"
-      data-category="alojamientos"
-      data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4"]}]'
-      data-images='["img/alojamientos/copacabana/verano stay/verano-1.png", "img/alojamientos/copacabana/verano stay/verano-2.png", "img/alojamientos/copacabana/verano stay/verano-3.png"]'
-      data-description="Apartamento luminoso con balcón, ideal para estancias cortas o largas.">
-      <img class="open-modal-trigger" src="img/alojamientos/copacabana/verano stay/verano-2.png"
-        alt="Apartamento Verano Stay">
-      <div class="card-content">
-        <h3>Apartamento Verano Stay</h3>
-        <p>Capacidad: 1 - 4 personas</p>
-      </div>
-    </div>
-
   </div>
 
-  <div id="modal-options" class="modal">
+  <div class="card" data-price="0" data-name="Apartamento Verano Stay" data-tipo="Apartamento" data-personas="2,3,4"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4"]}]'
+    data-images='["img/alojamientos/copacabana/verano stay/verano-1.png", "img/alojamientos/copacabana/verano stay/verano-2.png", "img/alojamientos/copacabana/verano stay/verano-3.png"]'
+    data-description="🌟 DESTACADO:
+Apartamento luminoso con balcón.
+
+✨ IDEAL PARA:
+Estancias cortas o largas.
+
+🏠 COMODIDADES:
+• Capacidad: 1 a 4 personas.
+• Ambiente: Moderno y confortable.">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/verano stay/verano-2.png"
+      alt="Apartamento Verano Stay">
+    <div class="card-content">
+      <h3>Apartamento Verano Stay</h3>
+      <p>Capacidad: 1 - 4 personas</p>
+    </div>
+  </div>
+
+  <div class="card" data-price="0"data-name="Apartamento 205" data-tipo="Apartamento" data-personas="1,2,3,4,5"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5"]}]'
+    data-images='["img/alojamientos/copacabana/apartamento 205/205,1.jpeg", "img/alojamientos/copacabana/apartamento 205/205,2.jpeg", "img/alojamientos/copacabana/apartamento 205/205,3.jpeg", "img/alojamientos/copacabana/apartamento 205/205,4.jpeg", "img/alojamientos/copacabana/apartamento 205/205,5.jpeg", "img/alojamientos/copacabana/apartamento 205/205,6.jpeg", "img/alojamientos/copacabana/apartamento 205/205,7.jpeg", "img/alojamientos/copacabana/apartamento 205/205,8.jpeg", "img/alojamientos/copacabana/apartamento 205/205,9.jpeg", "img/alojamientos/copacabana/apartamento 205/205,10.jpeg", "img/alojamientos/copacabana/apartamento 205/205,11.jpeg"]'
+    data-description="📍 UBICACIÓN PREMIUM:
+Rua Miguel Lemos 8, Centro de Copacabana.
+
+🌟 CARACTERÍSTICAS:
+• 🌊 Frente a la playa.
+• 🚶‍♂️ A 10 minutos de Ipanema y Leblon.
+• 🍽️ Zona rodeada de restaurantes y bares.
+• ✈️ A 40 minutos del aeropuerto (punto de recogida de tours).
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 5 personas.
+• Distribución: Cama matrimonial y sofá cama.
+• Equipamiento: TV, Wifi, Cocina equipada.
+• Incluye: Ropa de cama y toallas.
+• Edificio: Ascensor y Portero 24hs (recepción de llaves).">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apartamento 205/205,1.jpeg" alt="Apartamento 205">
+    <div class="card-content">
+      <h3>Apartamento 205</h3>
+      <p>Capacidad: 1 - 5 personas</p>
+    </div>
+  </div>
+
+  <div class="card" data-price="0" data-name="Apartamento 707" data-tipo="Apartamento" data-personas="1,2,3,4,5"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5"]}]'
+    data-images='["img/alojamientos/copacabana/apartamento 707/apartamento707.mp4"]'
+    data-description="📍 UBICACIÓN PREMIUM:
+Rua Miguel Lemos 8, Centro de Copacabana.
+
+🌟 CARACTERÍSTICAS:
+• 🌊 Frente a la playa.
+• 🚶‍♂️ A 10 minutos de Ipanema y Leblon.
+• 🍽️ Zona rodeada de restaurantes y bares.
+• ✈️ A 40 minutos del aeropuerto (punto de recogida de tours).
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 5 personas.
+• Distribución: Cama matrimonial y sofá cama.
+• Equipamiento: TV, Wifi, Cocina equipada.
+• Incluye: Ropa de cama y toallas.
+• Edificio: Ascensor y Portero 24hs (recepción de llaves).">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apartamento 707/707_portada2.png" alt="Apartamento 707">
+    <div class="card-content">
+      <h3>Apartamento 707</h3>
+      <p>Capacidad: 1 - 5 personas</p>
+    </div>
+  </div>
+  
+  <div class="card" data-price="0"  data-name="Apartamento 202" data-tipo="Apartamento" data-personas="1,2,3,4,5"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5"]}]'
+    data-images='["img/alojamientos/copacabana/apartamento202/apartamento202.mp4"]'
+    data-description="📍 UBICACIÓN PREMIUM:
+Rua Miguel Lemos 8, Centro de Copacabana.
+
+🌟 CARACTERÍSTICAS:
+• 🌊 Frente a la playa.
+• 🚶‍♂️ A 10 minutos de Ipanema y Leblon.
+• 🍽️ Zona rodeada de restaurantes y bares.
+• ✈️ A 40 minutos del aeropuerto (punto de recogida de tours).
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 5 personas.
+• Distribución: Cama matrimonial y sofá cama.
+• Equipamiento: TV, Wifi, Cocina equipada.
+• Incluye: Ropa de cama y toallas.
+• Edificio: Ascensor y Portero 24hs (recepción de llaves).">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apartamento202/202_portada.png" alt="Apartamento 202">
+    <div class="card-content">
+      <h3>Apartamento 202</h3>
+      <p>Capacidad: 1 - 5 personas</p>
+    </div>
+  </div>
+
+  <div class="card" data-price="0"  data-name="Apartamento 1101" data-tipo="Apartamento" data-personas="1,2,3,4,5"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5"]}]'
+    data-images='["img/alojamientos/copacabana/apartamento 1101/apartamento1101.mp4"]'
+    data-description="📍 UBICACIÓN PREMIUM:
+Rua Miguel Lemos 8, Centro de Copacabana.
+
+🌟 CARACTERÍSTICAS:
+• 🌊 Frente a la playa.
+• 🚶‍♂️ A 10 minutos de Ipanema y Leblon.
+• 🏙️ Zona rodeada de restaurantes y bares.
+• ✈️ A 40 minutos del aeropuerto (punto de recogida de tours).
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 5 personas.
+• Distribución: Cama matrimonial y sofá cama.
+• Equipamiento: TV, Wifi, Cocina equipada.
+• Incluye: Ropa de cama y toallas.
+• Edificio: Ascensor y Portero 24hs (recepción de llaves).">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apartamento 1101/APARTAMENTO 1101_portada2.png" alt="Apartamento 1101">
+    <div class="card-content">
+      <h3>Apartamento 1101</h3>
+      <p>Capacidad: 1 - 5 personas</p>
+    </div>
+  </div>
+
+  <div class="card" data-price="0"  data-name="Apartamento Djalma Urich 57" data-tipo="Apartamento" data-personas="1,2,3,4"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4"]}]'
+    data-images='["img/alojamientos/copacabana/Djalma urich 57/djalmaurich57.mp4"]'
+    data-description="📍 UBICACIÓN:
+Djalma Urich 57, Copacabana Centro.
+
+🌟 CARACTERÍSTICAS:
+• 🏖️ A 50 metros de la playa de Copacabana.
+• 🚶‍♂️ A 10 minutos de Ipanema y Leblon.
+
+🏠 COMODIDADES:
+• Capacidad: 4 personas.
+• Distribución: Cama matrimonial + Cama cucheta.
+• Equipamiento: Cocina equipada, TV, Wifi.
+• Climatización: Aire acondicionado.
+• Edificio: Ascensor y Portero 24hs.">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/Djalma urich 57/DJALMA URICH 57_portada2.png" alt="Apartamento Djalma Urich">
+    <div class="card-content">
+      <h3>Apartamento Djalma Urich 57</h3>
+      <p>Capacidad: 1 - 4 personas</p>
+    </div>
+  </div>
+
+  <div class="card" data-price="0"  data-name="Apartamento Av. Atlantica 2440" data-tipo="Apartamento" data-personas="1,2,3,4,5,6,7,8"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5", "6", "7", "8"]}]'
+    data-images='["img/alojamientos/copacabana/Av. Atlantica 2440/avatlantica2440.mp4"]'
+    data-description="📍 UBICACIÓN EXCLUSIVA:
+Av. Atlantica 2440 (Sobre la costanera).
+
+🌟 CARACTERÍSTICAS:
+• 🌊 ¡Vista frontal al mar!
+• 🚶‍♂️ A 10 minutos de Ipanema y Leblon.
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 8 personas.
+• Distribución: 2 habitaciones (2 camas matrimoniales, 1 soltero, 2 sofás cama).
+• Equipamiento: Cocina completa, TV, Wifi.
+• Climatización: Aire acondicionado.
+• Edificio: Ascensor y Portero 24hs.">
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/Av. Atlantica 2440/atlantica2240_portada.png" alt="Apartamento Av. Atlantica">
+    <div class="card-content">
+      <h3>Apartamento Av. Atlantica 2440</h3>
+      <p>Capacidad: 1 - 8 personas</p>
+    </div>
+  </div>
+
+  <div class="card" data-price="0" data-name="Apartamento Copa Topacio" data-tipo="Apartamento" data-personas="1,2,3,4,5"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5"]}]'
+    data-images='["img/alojamientos/copacabana/apto copa topacio/apto copa topacio.mp4"]'
+    data-description="📍 UBICACIÓN:
+Av. Nossa Senhora de Copacabana 1150, Edificio Don Carlos.
+(Posto 5, a menos de 100 mts del mar).
+
+🌟 CARACTERÍSTICAS:
+• 📏 Tamaño: 45 m².
+• 🌊 Ubicación: Al lado del supermercado Pao de Azucar, zona de bares y restaurantes.
+• 🛡️ Seguridad: Portería y cámaras 24hs.
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 5 personas.
+• Dormitorio: Cama King Size, Smart TV 43, Placard empotrado.
+• Sala: Sofá cama matrimonial + Sofá cama individual, Smart TV 55.
+• Cocina: Mesa para 4, 4 hornallas y horno, microondas, heladera c/freezer, licuadora, cafetera, tostadora.
+• Baño: Completo con lavasecarropa.
+• Extras: Aire acondicionado, Wifi, Sábanas y toallas.
+• 🏖️ Kit de playa: 4 reposeras, sombrilla y heladera térmica.">
+    
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apto copa topacio/copa_topacio_portada2.png" alt="Apartamento Copa Topacio">
+    <div class="card-content">
+        <h3>Apartamento Copa Topacio</h3>
+        <p>Capacidad: 1 - 5 personas</p>
+    </div>
+</div>
+
+<div class="card" data-price="0" data-name="Apartamento Copa Esmeralda" data-tipo="Apartamento" data-personas="1,2,3,4,5,6"
+    data-category="alojamientos"
+    data-options='[{"Noches": ["1", "2", "3", "4", "5"]}, {"Personas": ["1", "2", "3", "4", "5", "6"]}]'
+    data-images='["img/alojamientos/copacabana/apto copa emeralda/apto copa esmeralda.mp4"]'
+    data-description="📍 UBICACIÓN:
+Av. Nossa Senhora de Copacabana 1150, Edificio Don Carlos.
+(Posto 5, a menos de 100 mts del mar).
+
+🌟 CARACTERÍSTICAS:
+• 📏 Tamaño: 42 m².
+• 🚇 Conectividad: A 500 mts de la estación de metro.
+• 🛡️ Seguridad: Portería y cámaras 24hs.
+
+🏠 COMODIDADES:
+• Capacidad: Hasta 6 personas.
+• Dormitorio: Cama King Size, Smart TV 32, Vestidor.
+• Sala: Sofá cama matrimonial, Entrepiso con colchón matrimonial, Smart TV 50.
+• Cocina: Mesa para 5, 5 hornallas y horno, microondas, heladera c/freezer, licuadora, cafetera, tostadora.
+• Lavadero: Area con lavasecarropa.
+• Extras: Aire acondicionado, Wifi, Sábanas y toallas.
+• 🏖️ Kit de playa: 4 reposeras, sombrilla y heladera térmica.">
+    
+    <img class="open-modal-trigger" src="img/alojamientos/copacabana/apto copa emeralda/copa_esmeralda_portada.png" alt="Apartamento Copa Esmeralda">
+    <div class="card-content">
+        <h3>Apartamento Copa Esmeralda</h3>
+        <p>Capacidad: 1 - 6 personas</p>
+    </div>
+
+</div>
+
+  </div> <div id="modal-options" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
       <h2 id="modal-title"></h2>
@@ -162,19 +423,28 @@ Tienen cama matrimonial y sofá cama.
 
       <div class="modal-gallery">
         <button class="modal-nav-button prev-slide">&#10094;</button>
-        <div class="modal-slides-container">
-        </div>
+        <div class="modal-slides-container"></div>
         <button class="modal-nav-button next-slide">&#10095;</button>
       </div>
 
       <div class="modal-options-container">
-      </div>
-      <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
+        <div class="date-selection-container">
+          <div class="date-group">
+            <label for="checkin">Fecha de Ingreso:</label>
+            <input type="text" id="checkin" placeholder="Día de llegada" readonly>
+          </div>
+          <div class="date-group">
+            <label for="checkout">Fecha de Salida:</label>
+            <input type="text" id="checkout" placeholder="Día de salida" readonly>
+          </div>
+        </div>
+        </div>
+
+     <p class="modal-price">Precio: Cotizacion vía WhatsApp</p>
       <button id="add-to-cart-modal">Agregar al carrito</button>
     </div>
-  </div>
+</div>
 
-  <!-- FOOTER -->
   <footer id="contacto">
     <div class="footer-content">
       <div class="social-logos">
@@ -198,15 +468,16 @@ Tienen cama matrimonial y sofá cama.
         <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
       </div>
 
-      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por </p>
+      <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por 
+        <a href="https://joak1267.github.io/Portafolio-Joa-Tech/" target="_blank" class="dev-link">Joa Tech</a> &
+        <a href="https://mermediaart.github.io/web/" target="_blank" class="dev-link">MerMedia Art</a>
+      </p>
     </div>
 
-    <!-- Botón flotante WhatsApp -->
     <a href="https://wa.me/5491156213704" target="_blank" class="whatsapp-float" id="whatsappButton">
       <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Globito de mensaje -->
     <div class="whatsapp-bubble" id="whatsappBubble">
       ¿Tenés dudas? ¡Consultanos!
     </div>

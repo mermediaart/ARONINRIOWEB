@@ -15,6 +15,10 @@
         href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=League+Spartan:wght@100..900&display=swap"
         rel="stylesheet">
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
 </head>
 
 <!-- Ícono que aparece en la pestaña del navegador -->
@@ -24,12 +28,12 @@
 
     <!-- NAVBAR (barra de navegación principal) -->
     <nav class="navbar">
-    <!-- Logo de la empresa con link a index.html -->
-    <div class="navbar-logo">
-      <a href="index.html">
-        <img src="img/Logo Aaron.png" alt="Logo">
-      </a>
-    </div>
+        <!-- Logo de la empresa con link a index.html -->
+        <div class="navbar-logo">
+            <a href="index.html">
+                <img src="img/Logo Aaron.png" alt="Logo">
+            </a>
+        </div>
 
         <!-- Botón Hamburguesa (solo en móvil/tablet) -->
         <div class="menu-btn" id="menu-btn">
@@ -37,11 +41,9 @@
             <span></span>
             <span></span>
         </div>
-
-        <!-- Enlaces de navegación -->
+   <!-- Enlaces de navegación -->
         <div class="navbar-nav" id="menu">
             <a href="index.html">Inicio</a>
-            <a href="index.html#ofertas">Ofertas</a>
             <a href="index.html#nosotros">Nosotros</a>
             <a href="index.html#opiniones">Opiniones</a>
             <a href="index.html#contacto">Contacto</a>
@@ -52,7 +54,7 @@
             <i class="fa-solid fa-cart-shopping"></i>
             <span id="cart-count">0</span>
         </div>
- 
+
         <!-- Overlay de fondo -->
         <div id="cart-overlay"></div>
 
@@ -71,15 +73,59 @@
 
             <div class="cart-footer">
                 <div class="cart-subtotal">
-                    <span>Subtotal:</span>
-                    <strong>R$<span id="cart-total">0</span></strong>
-                </div>
+    <span>Subtotal:</span>
+    <strong><span id="cart-total">D$ 0.00</span></strong> </div>
                 <button id="cart-send">Finalizar compra</button>
                 <button id="cart-clear">Vaciar carrito</button>
             </div>
         </div>
 
 
+<div class="quick-side-menu" id="sideMenu">
+  <button class="side-menu-toggle" id="sideMenuToggle">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-hotel"></i>
+      <span>Alojamientos</span>
+    </div>
+    <div class="group-links">
+      <a href="AlojamientosCopacabana.html">• Copacabana</a>
+      <a href="AlojamientosBuzios.html">• Buzios</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-car"></i>
+      <span>Traslados</span>
+    </div>
+    <div class="group-links">
+      <a href="trasladosexternos.html">• Externos</a>
+      <a href="trasladosInternos.html">• Internos</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <div class="group-header">
+      <i class="fas fa-umbrella-beach"></i>
+      <span>Excursiones</span>
+    </div>
+    <div class="group-links">
+      <a href="ExcurcionesRio.html">• Río de Janeiro</a>
+      <a href="ExcurcionesBuzios.html">• Buzios</a>
+    </div>
+  </div>
+
+  <div class="menu-group">
+    <a href="paquetes.html" class="group-header single-link">
+      <i class="fas fa-suitcase-rolling"></i>
+      <span>Paquetes</span>
+    </a>
+  </div>
+</div>
     </nav>
 
     <header>
@@ -97,38 +143,34 @@
 
     <div class="container">
 
-        <div class="card" data-name="Paquete Buzios" data-price="1200" data-category="ofertas"
+        <div class="card" data-price="799" data-name="Paquete Buzios"  data-precio-tipo="fijo" data-category="ofertas"
             data-options='[{"Cantidad de personas": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Más de 10"]}]'
-            data-images='["img/ofertaX.jpg", "img/Buzios.jpg", "img/Cabo Frio-1920x1080.jpg"]'
-            data-description="Paquete de alojamiento y traslados con descuento. Disfruta de una estadía en Buzios sin preocupaciones.">
-            <img class="open-modal-trigger" src="img/ofertaX.jpg" alt="Oferta 1">
+            data-images='["img/paquete_buzios.png"]'
+            data-description=" ✨ BÚZIOS: 7 NOCHES SOÑADAS ✨ 
+
+📅 Fecha: 1 al 8 de Marzo ✅ ¡Salidas Confirmadas!
+
+Tu paquete incluye: 
+✈️ Aéreos + Traslados: Llegada y salida resueltas. 
+🏨 Hospedaje: 7 Noches en Posada. 
+☕ Régimen: Desayuno incluido.">
+            <img class="open-modal-trigger" src="img/paquete_buzios.png" alt="Oferta 1">
             <div class="card-content">
-                <h3>Paquete Buzios: Alojamiento + Traslado</h3>
-                <p>Incluye 4 noches en Buzios + traslados de aeropuerto.</p>
-                <p class="offer-price">Precio: R$1200</p>
+                <h3>Paquete Buzios</h3>
+                <p>Incluye 7 noches en Buzios + traslados y vuelo.</p>
+                <p class="offer-price">Precio: $799</p>
             </div>
         </div>
 
-        <div class="card" data-name="Traslado Privado + City Tour" data-price="350" data-category="ofertas"
-            data-options='[{"Tipo": ["Traslado Aeropuerto", "Traslado Intercity"]}]'
+        <div class="card" data-price="800" data-name="Traslado Privado + City Tour" data-precio-tipo="fijo" 
+            data-category="ofertas" data-options='[{"Tipo": ["Traslado Aeropuerto", "Traslado Intercity"]}]'
             data-images='["img/trasaladospriv2.jpg", "img/trasaladospriv.jpg", "img/Rio de Janeiro.jpg"]'
             data-description="Contrata un traslado privado y obtén un tour gratuito por las playas de Copacabana.">
             <img class="open-modal-trigger" src="img/trasaladospriv2.jpg" alt="Oferta 2">
             <div class="card-content">
                 <h3>Traslado Privado + City Tour Gratuito</h3>
                 <p>Contrata un traslado privado y obtén un tour a pie por Copacabana.</p>
-                <p class="offer-price">Precio: R$350</p>
-            </div>
-        </div>
-        <div class="card" data-name="Traslado Privado + City Tour" data-price="350" data-category="ofertas"
-            data-options='[{"Tipo": ["Traslado Aeropuerto", "Traslado Intercity"]}]'
-            data-images='["img/trasaladospriv2.jpg", "img/trasaladospriv.jpg", "img/Rio de Janeiro.jpg"]'
-            data-description="Contrata un traslado privado y obtén un tour gratuito por las playas de Copacabana.">
-            <img class="open-modal-trigger" src="img/trasaladospriv2.jpg" alt="Oferta 2">
-            <div class="card-content">
-                <h3>Traslado Privado + City Tour Gratuito</h3>
-                <p>Contrata un traslado privado y obtén un tour a pie por Copacabana.</p>
-                <p class="offer-price">Precio: R$350</p>
+                <p class="offer-price">Precio: $800</p>
             </div>
         </div>
     </div>
@@ -150,7 +192,11 @@
             </div>
 
             <div class="modal-options-container"></div>
-            <p class="modal-price">Precio Total: R$<span id="modal-price-value">0</span></p>
+
+            <div class="modal-price-info">
+                <p class="modal-price">Precio Total: <span id="modal-price-value">0</span></p>
+            </div>
+
             <button id="add-to-cart-modal">Agregar al carrito</button>
         </div>
     </div>
@@ -180,7 +226,10 @@
                 <p><i class="fas fa-envelope"></i> info@aaroninrio.com.ar</p>
             </div>
 
-            <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por </p>
+            <p class="footer-copy">&copy; 2025 Aaron In Rio | Todos los derechos reservados | Creado por 
+        <a href="https://joak1267.github.io/Portafolio-Joa-Tech/" target="_blank" class="dev-link">Joa Tech</a> &
+        <a href="https://mermediaart.github.io/web/" target="_blank" class="dev-link">MerMedia Art</a>
+      </p>
         </div>
 
         <!-- Botón flotante WhatsApp -->
@@ -197,6 +246,8 @@
 
     <script src="js/script.js"></script>
     <script src="js/cart.js"></script>
+        <!-- precios paquetes -->
+  <script src="js/precios.js"></script>
 
 </body>
 
