@@ -1,7 +1,6 @@
 /*---------------------------------------------------
 en este script van todas las funciones generales de la web
 ---------------------------------------------------*/
-
 /*---------------------------------------------------
 MENU RESPONSIVE
 ---------------------------------------------------*/
@@ -32,6 +31,30 @@ menuItems.forEach((item) => {
 });
 
 /*---------------------------------------------------
+SUBMENU
+---------------------------------------------------*/
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sideMenu = document.getElementById("sideMenu");
+    const sideToggle = document.getElementById("sideMenuToggle");
+
+    if (sideToggle) {
+        sideToggle.addEventListener("click", () => {
+            sideMenu.classList.toggle("active");
+        });
+    }
+
+    // Opcional: Cerrar menú al hacer clic en un link (en móvil)
+    const sideLinks = document.querySelectorAll(".side-link");
+    sideLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            if (window.innerWidth <= 768) {
+                sideMenu.classList.remove("active");
+            }
+        });
+    });
+});
+/*---------------------------------------------------
 WHATSAPP ROTATORIO
 ---------------------------------------------------*/
 const whatsappPhones = [
@@ -45,14 +68,16 @@ let currentPhoneIndex = parseInt(localStorage.getItem("currentPhoneIndex")) || 0
 const defaultMessage = "Hola! Estuve mirando la web y quería consultar sobre...";
 
 const whatsappButton = document.getElementById("whatsappButton");
-whatsappButton.addEventListener("click", (e) => {
-    e.preventDefault(); 
-    const phone = whatsappPhones[currentPhoneIndex];
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(defaultMessage)}`;
-    window.open(url, "_blank");
-    currentPhoneIndex = (currentPhoneIndex + 1) % whatsappPhones.length;
-    localStorage.setItem("currentPhoneIndex", currentPhoneIndex);
-});
+if (whatsappButton) {
+    whatsappButton.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        const phone = whatsappPhones[currentPhoneIndex];
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(defaultMessage)}`;
+        window.open(url, "_blank");
+        currentPhoneIndex = (currentPhoneIndex + 1) % whatsappPhones.length;
+        localStorage.setItem("currentPhoneIndex", currentPhoneIndex);
+    });
+}
 
 // --- Globito de WhatsApp flotante ---
 setTimeout(() => {
@@ -80,7 +105,7 @@ let modalContents;
 let indicators;
 
 function goToSlide(index) {
-    if (heroBgSlides.length === 0) return;
+    if (!heroBgSlides || heroBgSlides.length === 0) return;
     heroBgSlides[currentHeroSlide].classList.remove('active');
     heroContentSlides[currentHeroSlide].classList.remove('active');
     heroBgSlides[index].classList.add('active');
@@ -100,9 +125,11 @@ function updateIndicators(index) {
 
 function startAutoSlide() {
     clearInterval(carouselInterval);
-    carouselInterval = setInterval(() => {
-        goToSlide((currentHeroSlide + 1) % totalSlides);
-    }, 5000); // Cambio automático cada 5 segundos
+    if (totalSlides > 0) {
+        carouselInterval = setInterval(() => {
+            goToSlide((currentHeroSlide + 1) % totalSlides);
+        }, 5000);
+    }
 }
 
 function initHeroCarousel() {
@@ -111,7 +138,12 @@ function initHeroCarousel() {
     const heroSection = document.getElementById('inicio');
     indicators = document.querySelectorAll('.indicator');
 
-    // --- LÓGICA TÁCTIL (SWIPE) REINTEGRADA ---
+    // --- CORRECCIÓN: CONECTAMOS LAS VARIABLES CON EL HTML ---
+    heroBgSlides = document.querySelectorAll('.hero-bg-slide');
+    heroContentSlides = document.querySelectorAll('.hero-content-slide');
+    totalSlides = heroBgSlides.length;
+    // --------------------------------------------------------
+
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -197,53 +229,26 @@ function resumeCardsAutoScroll() {
     cardsResumeTimeout = setTimeout(() => { initCardsAutoScroll(); }, 3000);
 }
 
-// IMPLEMENTACIÓN ACTUALIZADA CON STOPPROPAGATION PARA EVITAR CONFLICTO CON HERO
 function setupCardsInteraction() {
-    const cardsContainer = document.querySelector('.card-grid-hero > div');
-    if (!cardsContainer) return;
+    const container = document.querySelector('.card-grid-hero > div');
+    if (!container) return;
 
-    cardsContainer.addEventListener('touchstart', (e) => {
-        // Evita que el evento táctil llegue al carrusel Hero superior
+    container.addEventListener('touchstart', (e) => {
         e.stopPropagation();
         pauseCardsAutoScroll();
     }, {passive: true});
 
-    cardsContainer.addEventListener('touchend', (e) => {
+    container.addEventListener('touchend', (e) => {
         e.stopPropagation();
         resumeCardsAutoScroll();
     }, {passive: true});
 
-    cardsContainer.addEventListener('scroll', () => {
+    container.addEventListener('scroll', () => {
         pauseCardsAutoScroll();
         resumeCardsAutoScroll();
     });
 }
 
-/*---------------------------------------------------
-LÓGICA DEL MODAL GENÉRICO
----------------------------------------------------*/
-function openModal(contentId) {
-    if (modalContents) {
-        modalContents.forEach(content => content.classList.add('hidden'));
-    }
-    const contentToShow = document.getElementById(contentId);
-    if (contentToShow) contentToShow.classList.remove('hidden');
-    if (genericModal) {
-        genericModal.classList.remove('hidden');
-        setTimeout(() => genericModal.classList.add('visible'), 10);
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeModal() {
-    if (genericModal) {
-        genericModal.classList.remove('visible');
-        setTimeout(() => {
-            genericModal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 300);
-    }
-}
 
 /*---------------------------------------------------
 SISTEMA DE PUBLICIDAD SECUENCIAL INFINITA
@@ -286,45 +291,128 @@ function initSideAd() {
 }
 
 /*---------------------------------------------------
-INICIALIZACIÓN GENERAL (DOMContentLoaded)
+INICIALIZACIÓN DE CALENDARIOS (NUEVO)
 ---------------------------------------------------*/
-document.addEventListener('DOMContentLoaded', () => {
-    heroBgSlides = document.querySelectorAll('.hero-bg-slide');
-    heroContentSlides = document.querySelectorAll('.hero-content-slide');
-    totalSlides = heroBgSlides.length;
-    genericModal = document.getElementById('generic-modal');
-    modalContents = document.querySelectorAll('.modal-content');
+function initCalendars() {
+    // Definimos mañana como fecha mínima (no permite reservar el mismo día)
+    const mañana = new Date();
+    mañana.setDate(mañana.getDate() + 1);
 
-    initHeroCarousel();
-    initCardsAutoScroll();
-    setupCardsInteraction();
-    initSideAd();
+    const configBase = {
+        locale: "es",
+        minDate: mañana,
+        dateFormat: "d/m/Y",
+        disableMobile: "true"
+    };
 
-    if (genericModal) {
-        genericModal.addEventListener('click', (event) => {
-            if (event.target.id === 'generic-modal') closeModal();
-        });
-        const closeButtons = genericModal.querySelectorAll('.modal-close-btn');
-        closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
-    }
+    // Inicializar Ingreso
+    const checkinInput = document.getElementById("checkin");
+    const checkoutInput = document.getElementById("checkout");
 
-    // CARGA DE ARCHIVOS EN OPINIONES (REINTEGRADO)
-    const fileInput = document.getElementById("files");
-    const fileList = document.getElementById("file-list");
-    if (fileInput) { 
-        fileInput.addEventListener("change", (event) => {
-            const files = event.target.files;
-            for (const file of files) {
-                const listItem = document.createElement("li");
-                listItem.classList.add("file-list-item");
-                listItem.innerHTML = `<span class="file-name">${file.name}</span><button class="delete-file-btn">×</button>`;
-                listItem.querySelector(".delete-file-btn").onclick = () => listItem.remove();
-                fileList.appendChild(listItem);
+    if (checkinInput && checkoutInput) {
+        const checkinPicker = flatpickr("#checkin", {
+            ...configBase,
+            onChange: function(selectedDates, dateStr) {
+                // Al elegir ingreso, el checkout debe ser mínimo al día siguiente
+                const nextDay = new Date(selectedDates[0]);
+                nextDay.setDate(nextDay.getDate() + 1);
+                checkoutPicker.set("minDate", nextDay);
             }
         });
+
+        const checkoutPicker = flatpickr("#checkout", configBase);
     }
+}
+
+/*---------------------------------------------------
+LÓGICA UNIFICADA DEL MODAL GENÉRICO
+---------------------------------------------------*/
+document.addEventListener('DOMContentLoaded', () => {
+    const genericModal = document.getElementById('generic-modal');
+    const closeBtn = document.getElementById('close-generic-modal');
+
+    
+/*---------------------------------------------------
+BLOQUEO DE SCROLL GARANTIZADO
+---------------------------------------------------*/
+window.openModal = function(contentId) {
+    const genericModal = document.getElementById('generic-modal');
+    const targetContent = document.getElementById(contentId);
+
+    if (genericModal && targetContent) {
+        const allContents = genericModal.querySelectorAll('.modal-content, .modal-content-new');
+        allContents.forEach(c => c.classList.add('hidden'));
+        targetContent.classList.remove('hidden');
+
+        genericModal.style.display = 'flex';
+        setTimeout(() => genericModal.classList.add('visible'), 10);
+
+        // BLOQUEO DE FONDO SOLAMENTE
+        document.body.classList.add('modal-open');
+    }
+};
+
+window.closeModal = function() {
+    const genericModal = document.getElementById('generic-modal');
+    if (genericModal) {
+        genericModal.classList.remove('visible');
+        document.body.classList.remove('modal-open');
+        setTimeout(() => { genericModal.style.display = 'none'; }, 300);
+    }
+};
 });
 
+
+/*---------------------------------------------------
+FUNCIONES PARA EL MODAL DE VIDEOS DE ASESORES
+---------------------------------------------------*/
+
+function verVideoAsesor(videoSrc) {
+    const modal = document.getElementById('videoAsesorModal');
+    const videoPlayer = document.getElementById('videoPlayerAsesor');
+    const source = videoPlayer.querySelector('source');
+
+    if (modal && videoPlayer && source) {
+        // Asignar la ruta del video al source
+        source.src = videoSrc;
+        
+        // Recargar el video para que tome el nuevo origen
+        videoPlayer.load();
+        
+        // Mostrar el modal
+        modal.classList.add('active');
+        
+        // Reproducir automáticamente (opcional)
+        videoPlayer.play().catch(error => {
+            console.log("La autoreproducción fue bloqueada por el navegador");
+        });
+
+        // Bloquear scroll del fondo
+        document.body.style.overflow = 'hidden';
+        if (typeof UIController !== 'undefined') {
+            UIController.lockScroll();
+        }
+    }
+}
+
+function cerrarVideoAsesor() {
+    const modal = document.getElementById('videoAsesorModal');
+    const videoPlayer = document.getElementById('videoPlayerAsesor');
+
+    if (modal && videoPlayer) {
+        // Pausar el video
+        videoPlayer.pause();
+        
+        // Ocultar el modal
+        modal.classList.remove('active');
+        
+        // Habilitar scroll
+        document.body.style.overflow = 'auto';
+        if (typeof UIController !== 'undefined') {
+            UIController.unlockScroll();
+        }
+    }
+}
 /*---------------------------------------------------
 ACCESO OCULTO A ADMIN
 ---------------------------------------------------*/
@@ -338,37 +426,10 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-/*---------------------------------------------------
-NUEVA IMPLEMENTACIÓN: VIDEO PARA ASESORES (RESPONSIVE & TACTIL)
----------------------------------------------------*/
-function verVideoAsesor(rutaVideo) {
-    const modal = document.getElementById('videoAsesorModal');
-    const video = document.getElementById('videoPlayerAsesor');
-    
-    if (modal && video) {
-        video.src = rutaVideo;
-        modal.classList.add('active'); 
-        video.play();
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function cerrarVideoAsesor() {
-    const modal = document.getElementById('videoAsesorModal');
-    const video = document.getElementById('videoPlayerAsesor');
-    
-    if (modal && video) {
-        video.pause();
-        video.src = ""; 
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
-
-// Escuchar clics en la ventana para cerrar si tocan el fondo negro del video
-window.addEventListener('click', (e) => {
-    const modalVideo = document.getElementById('videoAsesorModal');
-    if (e.target === modalVideo) {
-        cerrarVideoAsesor();
-    }
+// --- INICIALIZACIÓN GENERAL ---
+document.addEventListener("DOMContentLoaded", () => {
+    initHeroCarousel();
+    initCardsAutoScroll();
+    setupCardsInteraction();
+    initSideAd();
 });
