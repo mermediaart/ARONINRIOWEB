@@ -292,7 +292,7 @@ section { padding: 5rem 2rem; }
   box-shadow: -4px 0 15px rgba(0,0,0,0.25);
   padding: 1.2rem;
   overflow-y: auto;
-  z-index: 2100; /* Por encima de la navbar y modales */
+  z-index: 100000; /* Un nivel más arriba que el menú lateral */
   transform: translateX(100%);
   transition: transform 0.4s ease;
   border-top-left-radius: 20px;
@@ -440,7 +440,7 @@ section { padding: 5rem 2rem; }
   width: 100vw; 
   height: 100vh;
   background: rgba(0,0,0,0.5);
-  z-index: 2050;
+  z-index: 99998; /* Justo por debajo del menú lateral y del panel */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -671,7 +671,7 @@ position: relative;
     }
 }
 
-
+/* --- CATEGORÍAS MODIFICADAS --- */
 .categories-menu {
     display: none; 
 }
@@ -684,6 +684,10 @@ position: relative;
         position: sticky;
         top: 70px; 
         z-index: 40;
+        /* AJUSTE: Más margen superior para separarlo de las imágenes del Hero */
+        margin-top: 2.5rem !important; 
+        /* AJUSTE: Margen inferior para separarlo de las tarjetas de beneficios */
+        margin-bottom: 1.5rem !important;
     }
 
     .categories-container {
@@ -712,7 +716,7 @@ position: relative;
         min-width: 75px;
         flex-shrink: 0;
         scroll-snap-align: start;
-         min-width: calc(25% - 0.5rem); 
+        min-width: calc(25% - 0.5rem); 
         transition: all 0.3s ease;
     }
 
@@ -747,12 +751,15 @@ position: relative;
     }
 }
 
+/* --- TARJETAS HERO MODIFICADAS --- */
 .card-grid-hero {
-    margin-top: 1rem !important;
+    /* AJUSTE: Reducido para que el margin-bottom de las categorías haga el trabajo */
+    margin-top: 0.5rem !important;
     padding-top: 0rem;
     position: relative;
     z-index: 50;
-      padding-bottom: 2rem;
+    /* AJUSTE: Más espacio al final antes de la siguiente sección (Alojamientos) */
+    padding-bottom: 3.5rem;
 }
 
 @media (min-width: 768px) {
@@ -778,10 +785,11 @@ position: relative;
 
 @media (max-width: 767px) {
     .card-item {
-        flex: 0 0 calc(33.333% - 0.67rem);
+        /* AJUSTE: Un poco más de ancho para que el contenido no se vea apretado */
+        flex: 0 0 calc(40% - 1rem); 
         scroll-snap-align: start;
-        min-width: 80px;
-        max-width: 120px;
+        min-width: 110px;
+        max-width: 140px;
     }
 }
 
@@ -897,6 +905,68 @@ position: relative;
 /*=============================================
   7. SISTEMA DE MODALES UNIFICADO
 =============================================*/
+
+/* BLOQUEO DE SCROLL DEFINITIVO */
+body.modal-open {
+    overflow: hidden !important;
+    height: 100% !important;
+    position: fixed; /* Evita que el body salte al inicio en móviles */
+    width: 100%;
+}
+
+
+/* PRECIOS CONGELADOS POR RESERVA */
+/* Glow verde y parpadeo para el input de fecha */
+.fecha-congelada-glow {
+    border: 2px solid #28a745 !important;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+    animation: glow-green 1.5s infinite alternate;
+    background-color: #f0fff4 !important;
+    transition: all 0.3s ease;
+}
+
+@keyframes glow-green {
+    from {
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.4);
+        transform: scale(1);
+    }
+    to {
+        box-shadow: 0 0 15px rgba(40, 167, 69, 0.8);
+        transform: scale(1.02);
+    }
+}
+
+/* El globo informativo (Tooltip) */
+.precio-congelado-tooltip {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: fadeInDown 0.5s ease;
+}
+
+/* Triangulito del globo */
+.precio-congelado-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #28a745 transparent transparent transparent;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 .modal {
     display: none;
@@ -1177,7 +1247,7 @@ position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 4rem;
   max-width: 1100px;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -1194,7 +1264,7 @@ position: relative;
 .about-image img:hover { transform: scale(1.05); }
 .about-text { flex: 1 1 400px; color: #000000; }
 .about-text p { margin-bottom: 1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-.about-cta { margin-top: 1.5rem; font-weight: 600; color: #00ab6f; }
+.about-cta { margin-top: 1.5rem; font-weight: 800; color: #00ab6f; }
 
 .asesores { padding: 40px 20px; text-align: center; }
 .asesores h2 { margin-bottom: 20px; color: var(--dark); }
@@ -1444,15 +1514,37 @@ position: relative;
         object-fit: cover !important;
     }
 
-    /* Ajuste para las estrellas */
+    
+}
+
+/* Ajuste para las estrellas en móvil */
+@media (max-width: 768px) {
+    /* ... otros estilos ... */
+
     .rating-stars {
         display: flex !important;
-        gap: 2px !important;
+        flex-direction: row-reverse !important; /* Mantiene la lógica del hover/check */
+        justify-content: flex-end !important;
+        gap: 8px !important; /* Más espacio entre estrellas para evitar toques erróneos */
+        margin-top: 5px;
+    }
+
+    .rating-stars label {
+        width: 45px !important;  /* Área de toque más ancha */
+        height: 45px !important; /* Área de toque más alta */
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
     }
 
     .rating-stars label i {
-        font-size: 14px !important;
-        color: #f6ad55 !important;
+        font-size: 28px !important; /* Tamaño legible y tocable (antes era 14px, muy pequeño) */
+        color: #d1d5db !important; /* Color gris por defecto */
+    }
+
+    /* Asegurar que las estrellas se pinten al estar checked en móvil */
+    .rating-stars input:checked ~ label i {
+        color: #f59e0b !important;
     }
 }
 /*=============================================
@@ -1528,7 +1620,34 @@ footer { background: var(--dark); color: var(--light); padding: 2rem 1.5rem; tex
 .contact-column { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; font-size: 0.95rem; }
 .contact-column i { color: var(--primary); margin-right: 8px; }
 
-.footer-copy { font-size: 0.85rem; color: #ccc; }
+/* Texto general del footer */
+.footer-copy {
+    color: #f9f6f6; /* Un gris muy clarito para el texto base */
+    font-size: 14px;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+/* Estilo para los nombres (Joa Tech y Mer Media Art) */
+.dev-link {
+    color: #ffffff !important;
+    font-weight: 700;          
+    text-decoration: none;     
+    margin: 0 2px;             
+    
+    /* --- AQUÍ ESTÁ EL ARREGLO DEL ESPASMO --- */
+    display: inline-block;       /* Estabiliza la caja del texto */
+    transform: translateZ(0);    /* Truco: fuerza al navegador a usar la GPU para no parpadear */
+    backface-visibility: hidden; /* Evita micro-movimientos en algunos navegadores */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transición suave específica */
+}
+
+/* Efecto Hover */
+.dev-link:hover {
+    color: #33e4e1 !important; 
+    text-shadow: 0 0 10px rgba(51, 228, 225, 0.6); 
+    cursor: pointer;
+}
 
 .whatsapp-float { position: fixed; width: 58px; height: 58px; bottom: 22px; right: 22px; background-color: #25D366; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); z-index: 1000; transition: transform 0.3s ease; text-decoration:none ; }
 .whatsapp-float:hover { transform: scale(1.1); }

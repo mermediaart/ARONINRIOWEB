@@ -1,8 +1,7 @@
 /*--------------------------------------------------------
 BANNER INICIO - MEJORADO
 --------------------------------------------------------*/
-    /* HEADER - MEJORADO */
-    header { 
+   header { 
       padding: 60px 10px 40px; 
       text-align: center; 
       background: linear-gradient(135deg, #33e4e1 0%, #2ac4c1 50%, #1fa4a1 100%); 
@@ -40,191 +39,146 @@ BANNER INICIO - MEJORADO
       animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
     }
 
-/* TEMA COPACABANA - Inspirado en la playa famosa de Río */
-body.copacabana-theme {
-    background: linear-gradient(135deg, 
-        rgba(30, 144, 255, 0.1) 0%,    /* Azul marino suave */
-        rgba(255, 215, 0, 0.08) 25%,   /* Dorado playa */
-        rgba(255, 255, 255, 0.9) 50%,  /* Blanco arena */
-        rgba(0, 206, 209, 0.1) 75%,    /* Turquesa mar */
-        rgba(255, 140, 0, 0.05) 100%   /* Naranja atardecer */
-    );
-    background-color: #f8fcff;
-    min-height: 100vh;
+/* --- FONDO ESPECÍFICO PARA COPACABANA --- */
+.header-alojamiento-copacabana {
+    /* AGREGAMOS '../' AL PRINCIPIO PARA SALIR DE LA CARPETA CSS */
+    background: url('../img/alojamientos/copacabana/copacabana2.jpg') no-repeat center center !important;
+    background-size: cover !important;
 }
 
-/* Tema específico para el header de Copacabana */
-body.copacabana-theme header {
-    background: linear-gradient(135deg, 
-        #1E90FF 0%,     /* Azul Dodger */
-        #00BFFF 50%,    /* Azul cielo profundo */
-        #87CEEB 100%    /* Azul cielo */
-    );
+/* CORREGIMOS EL ERROR DE TIPEO AQUÍ ABAJO (FALTABA UN GUIÓN) */
+.header-alojamiento-copacabana {
+    padding: 100px 10px !important; 
 }
 
-/* TEMA BUZIOS - Inspirado en el estilo bohemio y playas */
-body.buzios-theme {
-    background: linear-gradient(135deg,
-        rgba(34, 139, 34, 0.08) 0%,    /* Verde bosque suave */
-        rgba(255, 215, 0, 0.06) 20%,   /* Dorado suave */
-        rgba(218, 165, 32, 0.08) 40%,  /* Dorado rojizo */
-        rgba(107, 142, 35, 0.06) 60%,  /* Verde oliva */
-        rgba(210, 105, 30, 0.05) 100%  /* Chocolate suave */
-    );
-    background-color: #f9f7f0;
-    min-height: 100vh;
+/* --- FONDO ESPECÍFICO PARA BUZIOS --- */
+.header-alojamiento-buzios {
+    /* AGREGAMOS '../' AL PRINCIPIO PARA SALIR DE LA CARPETA CSS */
+    background: url('../img/alojamientos/buzios/buizosbest.jpg') no-repeat center center !important;
+    background-size: cover !important;
 }
 
-/* Tema específico para el header de Buzios */
-body.buzios-theme header {
-    background: linear-gradient(135deg,
-        #228B22 0%,     /* Verde bosque */
-        #32CD32 50%,    /* Verde lima */
-        #9ACD32 100%    /* Amarillo verde */
-    );
+/* CORREGIMOS EL ERROR DE TIPEO AQUÍ ABAJO (FALTABA UN GUIÓN) */
+.header-alojamiento-buzios {
+    padding: 100px 10px !important; 
 }
-
 /*--------------------------------------------------------
-TEMAS PARA EXCURSIONES
+TEMAS PARA TRASLADOS
 --------------------------------------------------------*/
 
-/* TEMA EXCURSIONES RÍO - Inspirado en la energía de la ciudad */
-body.excursion-rio-theme {
+/* TEMA TRASLADOS INTERNOS - Movimiento dentro de la ciudad */
+body.traslados-internos-theme {
     background: linear-gradient(135deg,
-        rgba(255, 69, 0, 0.08) 0%,      /* Naranja rojizo - energía */
-        rgba(255, 215, 0, 0.1) 25%,     /* Dorado - Cristo Redentor */
-        rgba(30, 144, 255, 0.12) 50%,   /* Azul mar - playas */
-        rgba(0, 128, 0, 0.08) 75%,      /* Verde - montañas */
-        rgba(139, 0, 0, 0.05) 100%      /* Rojo oscuro - pasión */
+        rgba(100, 149, 237, 0.1) 0%,    /* Azul acero - transporte */
+        rgba(176, 196, 222, 0.12) 25%,  /* Azul claro - caminos */
+        rgba(245, 245, 220, 0.1) 50%,   /* Beige - calles */
+        rgba(119, 136, 153, 0.08) 75%,  /* Gris pizarra - asfalto */
+        rgba(47, 79, 79, 0.05) 100%     /* Gris oscuro - carreteras */
     );
-    background-color: #fff8f0;
+    background-color: #f5f8fa;
     min-height: 100vh;
 }
 
-/* Header específico para excursiones en Río */
-body.excursion-rio-theme header {
+/* Header específico para traslados internos */
+body.traslados-internos-theme header {
     background: linear-gradient(135deg,
-        #FF4500 0%,     /* Naranja rojo */
-        #FFD700 50%,    /* Dorado */
-        #1E90FF 100%    /* Azul Dodger */
+        #6495ED 0%,     /* Azul acero */
+        #B0C4DE 50%,    /* Azul claro */
+        #D3D3D3 100%    /* Gris claro */
     );
 }
 
-/* TEMA EXCURSIONES BUZIOS - Inspirado en el estilo bohemio y playero */
-body.excursion-buzios-theme {
+/* TEMA TRASLADOS EXTERNOS - Viajes entre ciudades/aeropuertos */
+body.traslados-externos-theme {
     background: linear-gradient(135deg,
-        rgba(64, 224, 208, 0.1) 0%,     /* Turquesa - mar */
-        rgba(245, 222, 179, 0.12) 25%,  /* Trigo - arena */
-        rgba(210, 180, 140, 0.08) 50%,  /* Tan - casas */
-        rgba(107, 142, 35, 0.1) 75%,    /* Verde oliva - vegetación */
-        rgba(165, 42, 42, 0.05) 100%    /* Marrón - madera */
+        rgba(70, 130, 180, 0.1) 0%,     /* Azul acero - distancia */
+        rgba(135, 206, 250, 0.12) 25%,  /* Azul cielo - viajes largos */
+        rgba(240, 255, 240, 0.1) 50%,   /* Miel - seguridad */
+        rgba(255, 228, 196, 0.08) 75%,  /* Bisque - comodidad */
+        rgba(139, 69, 19, 0.05) 100%    /* Marrón - equipaje */
     );
-    background-color: #f5f9f8;
+    background-color: #f0f8ff;
     min-height: 100vh;
 }
 
-/* Header específico para excursiones en Buzios */
-body.excursion-buzios-theme header {
-    background: linear-gradient(135deg,
-        #40E0D0 0%,     /* Turquesa */
-        #A0522D 50%,    /* Sienna */
-        #8FBC8F 100%    /* Verde mar oscuro */
-    );
-}
-
-/*--------------------------------------------------------
-TEMAS PARA DIFERENTES DESTINOS (incluye los anteriores)
---------------------------------------------------------*/
-
-/* TEMA COPACABANA - Inspirado en la playa famosa de Río */
-body.copacabana-theme {
-    background: linear-gradient(135deg, 
-        rgba(30, 144, 255, 0.1) 0%,    /* Azul marino suave */
-        rgba(255, 215, 0, 0.08) 25%,   /* Dorado playa */
-        rgba(255, 255, 255, 0.9) 50%,  /* Blanco arena */
-        rgba(0, 206, 209, 0.1) 75%,    /* Turquesa mar */
-        rgba(255, 140, 0, 0.05) 100%   /* Naranja atardecer */
-    );
-    background-color: #f8fcff;
-    min-height: 100vh;
-}
-
-/* Tema específico para el header de Copacabana */
-body.copacabana-theme header {
-    background: linear-gradient(135deg, 
-        #1E90FF 0%,     /* Azul Dodger */
-        #00BFFF 50%,    /* Azul cielo profundo */
-        #87CEEB 100%    /* Azul cielo */
-    );
-}
-
-/* TEMA BUZIOS - Inspirado en el estilo bohemio y playas */
-body.buzios-theme {
-    background: linear-gradient(135deg,
-        rgba(34, 139, 34, 0.08) 0%,    /* Verde bosque suave */
-        rgba(255, 215, 0, 0.06) 20%,   /* Dorado suave */
-        rgba(218, 165, 32, 0.08) 40%,  /* Dorado rojizo */
-        rgba(107, 142, 35, 0.06) 60%,  /* Verde oliva */
-        rgba(210, 105, 30, 0.05) 100%  /* Chocolate suave */
-    );
-    background-color: #f9f7f0;
-    min-height: 100vh;
-}
-
-/* Tema específico para el header de Buzios */
-body.buzios-theme header {
-    background: linear-gradient(135deg,
-        #228B22 0%,     /* Verde bosque */
-        #32CD32 50%,    /* Verde lima */
-        #9ACD32 100%    /* Amarillo verde */
-    );
-}
-
-/*--------------------------------------------------------
-TEMA UNIFICADO PARA PÁGINA DE PAQUETES
---------------------------------------------------------*/
-/*--------------------------------------------------------
-TEMA BÁSICO PARA PÁGINA DE PAQUETES
---------------------------------------------------------*/
-
-/* Color de fondo para body - paquete-theme */
-body.paquete-theme {
-    background: linear-gradient(135deg,
-        rgba(70, 130, 180, 0.1) 0%,    /* Azul acero */
-        rgba(255, 182, 193, 0.08) 25%, /* Rosa claro */
-        rgba(107, 142, 35, 0.06) 50%,  /* Verde oliva */
-        rgba(255, 215, 0, 0.05) 75%,   /* Dorado */
-        rgba(255, 140, 0, 0.08) 100%   /* Naranja */
-    );
-    background-color: #f9fbfd;
-}
-
-/* Header específico para paquete-theme */
-body.paquete-theme header {
+/* Header específico para traslados externos */
+body.traslados-externos-theme header {
     background: linear-gradient(135deg,
         #4682B4 0%,     /* Azul acero */
-        #FFB6C1 33%,    /* Rosa claro */
-        #6B8E23 66%,    /* Verde oliva */
-        #FF8C00 100%    /* Naranja oscuro */
+        #87CEFA 50%,    /* Azul cielo */
+        #F0E68C 100%    /* Caqui */
     );
-    color: white;
+}
+/*--------------------------------------------------------
+TEMAS ESPECÍFICOS POR TIPO DE TRASLADO
+--------------------------------------------------------*/
+
+/* Para páginas de aeropuerto específicas */
+body.traslados-aeropuerto-theme {
+    background: linear-gradient(135deg,
+        rgba(30, 144, 255, 0.1) 0%,    /* Azul Dodger - vuelos */
+        rgba(255, 255, 255, 0.15) 25%, /* Blanco - nubes */
+        rgba(255, 215, 0, 0.08) 50%,   /* Dorado - seguridad */
+        rgba(169, 169, 169, 0.06) 75%, /* Gris oscuro - asfalto pista */
+        rgba(0, 0, 139, 0.05) 100%     /* Azul oscuro - cielo nocturno */
+    );
+    background-color: #e6f2ff;
 }
 
-/* Animación sutil del gradiente */
-body.paquete-theme {
-    background-size: 200% 200%;
-    animation: moveGradient 20s ease infinite;
+body.traslados-aeropuerto-theme header {
+    background: linear-gradient(135deg,
+        #1E90FF 0%,     /* Azul Dodger */
+        #FFFFFF 50%,    /* Blanco */
+        #FFD700 100%    /* Dorado */
+    );
 }
 
-@keyframes moveGradient {
+/* Para páginas de traslados entre ciudades */
+body.traslados-ciudad-theme {
+    background: linear-gradient(135deg,
+        rgba(50, 205, 50, 0.1) 0%,     /* Verde lima - paisaje */
+        rgba(255, 182, 193, 0.08) 25%, /* Rosa claro - urbanidad */
+        rgba(255, 255, 224, 0.1) 50%,  /* Amarillo claro - luz ciudad */
+        rgba(186, 85, 211, 0.06) 75%,  /* Orquídea - diversión */
+        rgba(105, 105, 105, 0.05) 100% /* Gris oscuro - edificios */
+    );
+    background-color: #f8f8ff;
+}
+
+body.traslados-ciudad-theme header {
+    background: linear-gradient(135deg,
+        #32CD32 0%,     /* Verde lima */
+        #FFB6C1 50%,    /* Rosa claro */
+        #DDA0DD 100%    /* Ciruela */
+    );
+}
+
+/*--------------------------------------------------------
+ANIMACIONES PARA TRASLADOS
+--------------------------------------------------------*/
+
+/* Efecto sutil de movimiento para traslados */
+@keyframes subtleMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Para móviles, sin animación */
+/* Aplicar animación solo a temas de traslados */
+body.traslados-internos-theme,
+body.traslados-externos-theme,
+body.traslados-aeropuerto-theme,
+body.traslados-ciudad-theme {
+    background-size: 200% 200%;
+    animation: subtleMove 20s ease infinite;
+}
+
+/* Detener animación en móviles para rendimiento */
 @media (max-width: 768px) {
-    body.paquete-theme {
+    body.traslados-internos-theme,
+    body.traslados-externos-theme,
+    body.traslados-aeropuerto-theme,
+    body.traslados-ciudad-theme {
         animation: none;
         background-size: cover;
     }
@@ -234,7 +188,7 @@ body.paquete-theme {
 LISTADO DE ALOJAMIENTOS - MEJORADO
 --------------------------------------------------------*/
     /* BARRA DE BÚSQUEDA Y FILTROS - MEJORADO */
-    .search-filter {
+     .search-filter {
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
@@ -351,6 +305,16 @@ LISTADO DE ALOJAMIENTOS - MEJORADO
     }
 
     /* ESTILOS DE LA MODAL - MEJORADO */
+
+    /* EL FRENO DE MANO PARA EL SCROLL */
+body.modal-open {
+    overflow: hidden !important; /* Bloqueo estándar */
+    position: fixed !important; /* Bloqueo reforzado para móviles (iOS) */
+    width: 100% !important;
+    height: 100% !important;
+    /* La propiedad 'top' se maneja desde el JS automáticamente */
+}
+
     .modal {
       display: none;
       position: fixed;
@@ -428,14 +392,15 @@ LISTADO DE ALOJAMIENTOS - MEJORADO
       letter-spacing: -0.5px;
     }
     
-    .modal-description {
-      margin: 20px 0 30px;
-      color: #666;
-      font-size: 16px;
-      line-height: 1.7;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    }
+/* En Alojamientos.css */
+.modal-description {
+    white-space: pre-line; /* <--- ESTA LÍNEA ES LA CLAVE */
+    /* Tus otros estilos se mantienen igual... */
+    margin: 20px 0 30px;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.7;
+}
     
     .modal-options-container {
       margin-top: 25px;
@@ -616,7 +581,7 @@ LISTADO DE ALOJAMIENTOS - MEJORADO
 /* Responsive adjustments (manteniendo la estructura existente) */
 @media (max-width: 768px) {
   header {
-    padding: 10px 20px 40px;
+    padding: 100px 20px 40px;
   }
   
   header h1 {
@@ -670,4 +635,168 @@ LISTADO DE ALOJAMIENTOS - MEJORADO
 footer {
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.95);
+}
+
+/*=============================================
+  DISEÑO DE MENÚ LATERAL POR CATEGORÍAS
+=============================================*/
+.quick-side-menu {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 99999;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 15px 12px 15px 8px;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    max-height: 90vh;
+}
+
+/* Cabeceras de grupo (Icono + Título) */
+.group-header {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.group-header i {
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+    color: #06d849;
+}
+
+/* Contenedor de los sub-enlaces */
+.group-links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 35px; /* Alineado debajo del texto del header, no del icono */
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.group-links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.group-links a:hover {
+    color: #06d849;
+    transform: translateX(5px);
+}
+
+/* Control de visibilidad del texto */
+.group-header span, .group-links {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+/* Mostrar cuando el mouse está encima o está activo en móvil */
+.quick-side-menu:hover .group-header span,
+.quick-side-menu:hover .group-links,
+.quick-side-menu.active .group-header span,
+.quick-side-menu.active .group-links {
+    max-width: 250px;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+/* Ajuste para el link de Paquetes que es único */
+.single-link {
+    text-decoration: none;
+}
+
+/* FLECHITA PARA MÓVIL */
+.side-menu-toggle {
+    display: none;
+    background: #06d849;
+    border: none;
+    color: white;
+    width: 32px;
+    height: 45px;
+    position: absolute;
+    right: -32px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .quick-side-menu {
+        left: -45px; /* Esconde los nombres, deja asomar iconos */
+    }
+    .quick-side-menu.active {
+        left: 0;
+    }
+    .side-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .quick-side-menu.active .side-menu-toggle i {
+        transform: rotate(180deg);
+    }
+}
+
+/* OCULTAR SI EL CARRITO ESTÁ ABIERTO */
+#cart-panel.show ~ .quick-side-menu,
+#cart-overlay.active ~ .quick-side-menu {
+    display: none !important;
+}
+
+/* --- CORRECCIÓN CALENDARIO FLATPICKR (Pegar al final de Alojamientos.css) --- */
+
+/* 1. Obliga al contenedor del mes a usar Flexbox para alinear todo en una fila */
+.flatpickr-current-month {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+    height: 40px !important;
+}
+
+/* 2. Controla el ancho del contenedor del año para que no se estire */
+.flatpickr-current-month .numInputWrapper {
+    width: 65px !important;
+    display: inline-block !important;
+    flex: none !important; 
+}
+
+/* 3. Resetea el input del año para que ignore tus estilos generales de formulario */
+.flatpickr-current-month input.cur-year {
+    display: inline-block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    font-size: inherit !important;
+    font-weight: 400 !important;
+}
+
+/* 4. Opcional: Ajusta la posición de las flechas si se ven mal */
+.flatpickr-month {
+    height: 40px !important;
+}
+.flatpickr-prev-month, .flatpickr-next-month {
+    top: 5px !important; /* Sube o baja las flechas con este valor */
 }

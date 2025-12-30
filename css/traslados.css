@@ -282,6 +282,16 @@ LISTADO DE ALOJAMIENTOS - MEJORADO
     }
 
     /* ESTILOS DE LA MODAL - MEJORADO */
+
+    /* EL FRENO DE MANO PARA EL SCROLL */
+body.modal-open {
+    overflow: hidden !important; /* Bloqueo estándar */
+    position: fixed !important; /* Bloqueo reforzado para móviles (iOS) */
+    width: 100% !important;
+    height: 100% !important;
+    /* La propiedad 'top' se maneja desde el JS automáticamente */
+}
+
     .modal {
       display: none;
       position: fixed;
@@ -601,4 +611,168 @@ LISTADO DE ALOJAMIENTOS - MEJORADO
 footer {
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.95);
+}
+
+/*=============================================
+  DISEÑO DE MENÚ LATERAL POR CATEGORÍAS
+=============================================*/
+.quick-side-menu {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 99999;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 15px 12px 15px 8px;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    max-height: 90vh;
+}
+
+/* Cabeceras de grupo (Icono + Título) */
+.group-header {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.group-header i {
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+    color: #06d849;
+}
+
+/* Contenedor de los sub-enlaces */
+.group-links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 35px; /* Alineado debajo del texto del header, no del icono */
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.group-links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.group-links a:hover {
+    color: #06d849;
+    transform: translateX(5px);
+}
+
+/* Control de visibilidad del texto */
+.group-header span, .group-links {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+/* Mostrar cuando el mouse está encima o está activo en móvil */
+.quick-side-menu:hover .group-header span,
+.quick-side-menu:hover .group-links,
+.quick-side-menu.active .group-header span,
+.quick-side-menu.active .group-links {
+    max-width: 250px;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+/* Ajuste para el link de Paquetes que es único */
+.single-link {
+    text-decoration: none;
+}
+
+/* FLECHITA PARA MÓVIL */
+.side-menu-toggle {
+    display: none;
+    background: #06d849;
+    border: none;
+    color: white;
+    width: 32px;
+    height: 45px;
+    position: absolute;
+    right: -32px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .quick-side-menu {
+        left: -45px; /* Esconde los nombres, deja asomar iconos */
+    }
+    .quick-side-menu.active {
+        left: 0;
+    }
+    .side-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .quick-side-menu.active .side-menu-toggle i {
+        transform: rotate(180deg);
+    }
+}
+
+/* OCULTAR SI EL CARRITO ESTÁ ABIERTO */
+#cart-panel.show ~ .quick-side-menu,
+#cart-overlay.active ~ .quick-side-menu {
+    display: none !important;
+}
+
+/* --- CORRECCIÓN CALENDARIO FLATPICKR (Pegar al final de Alojamientos.css) --- */
+
+/* 1. Obliga al contenedor del mes a usar Flexbox para alinear todo en una fila */
+.flatpickr-current-month {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+    height: 40px !important;
+}
+
+/* 2. Controla el ancho del contenedor del año para que no se estire */
+.flatpickr-current-month .numInputWrapper {
+    width: 65px !important;
+    display: inline-block !important;
+    flex: none !important; 
+}
+
+/* 3. Resetea el input del año para que ignore tus estilos generales de formulario */
+.flatpickr-current-month input.cur-year {
+    display: inline-block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    font-size: inherit !important;
+    font-weight: 400 !important;
+}
+
+/* 4. Opcional: Ajusta la posición de las flechas si se ven mal */
+.flatpickr-month {
+    height: 40px !important;
+}
+.flatpickr-prev-month, .flatpickr-next-month {
+    top: 5px !important; /* Sube o baja las flechas con este valor */
 }
